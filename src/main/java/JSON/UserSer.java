@@ -1,5 +1,6 @@
 package JSON;
 
+import Exceptions.UsernameAlreadyExistsException;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import java.io.IOException;
@@ -10,6 +11,7 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Objects;
 
 
 public class UserSer {
@@ -32,10 +34,17 @@ public class UserSer {
       }
 
   }
+    private static void checkUserDoesNotAlreadyExist(String username) throws UsernameAlreadyExistsException {
+        for (User user : users) {
+            if (Objects.equals(username, user.getUsername()))
+                throw new UsernameAlreadyExistsException(username);
+        }
+    }
 
-    public void addUsers(User u) {
+    public void addUsers(User u) throws UsernameAlreadyExistsException {
 
       UserSer.FromAtoO();
+      checkUserDoesNotAlreadyExist(u.getUsername());
         try {
             write = Files.newBufferedWriter(Paths.get("User1.json"));
         } catch (IOException e) {
@@ -52,12 +61,18 @@ public class UserSer {
 
     }
 
+
     public static void main(String[] args) {
         User u1=new User("rare",CryptWithMD5.cryptWithMD5("ratata"),"dasd","s","d","k");
-        User u2=new User("mama","df2s",CryptWithMD5.cryptWithMD5("darsd"),"s","d","k");
+        User u2=new User("rare","df2s",CryptWithMD5.cryptWithMD5("darsd"),"s","d","k");
         UserSer userSer=new UserSer();
+        try {
             userSer.addUsers(u1);
             userSer.addUsers(u2);
+        }catch (UsernameAlreadyExistsException e){
+            System.out.println("fds");;
+        }
+
 
 
     }
