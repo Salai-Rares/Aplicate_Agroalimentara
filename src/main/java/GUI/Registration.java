@@ -1,5 +1,9 @@
 package GUI;
 
+import Exceptions.UsernameAlreadyExistsException;
+import JSON.CryptWithMD5;
+import JSON.User;
+import JSON.UserSer;
 import javafx.application.Application;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
@@ -18,6 +22,8 @@ import javafx.stage.Stage;
 import javafx.stage.Window;
 
 public class Registration extends Application {
+    private UserSer userSer;
+    private User user;
     @Override
     public void start(Stage primaryStage) throws Exception {
         primaryStage.setTitle("Inregistrare Aplicatie Agroalimentara");
@@ -139,11 +145,13 @@ public class Registration extends Application {
         GridPane.setHalignment(submitButton, HPos.CENTER);
         GridPane.setMargin(submitButton, new Insets(20, 0, 20, 0));
 
+
         submitButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
-            public void handle(ActionEvent event) {
+            public void handle(ActionEvent event)  {
+
                 if (usernameField.getText().isEmpty()) {
-                    showAlert(Alert.AlertType.ERROR, gridPane.getScene().getWindow(), "Form Error!", "Please enter your name");
+                    showAlert(Alert.AlertType.ERROR, gridPane.getScene().getWindow(), "Form Error!", "Please enter your username");
                     return;
                 }
                 if (emailField.getText().isEmpty()) {
@@ -154,6 +162,27 @@ public class Registration extends Application {
                     showAlert(Alert.AlertType.ERROR, gridPane.getScene().getWindow(), "Form Error!", "Please enter a password");
                     return;
                 }
+                if (FullNumeField.getText().isEmpty()) {
+                    showAlert(Alert.AlertType.ERROR, gridPane.getScene().getWindow(), "Form Error!", "Please enter a name");
+                    return;
+                }
+                if (PhoneFiled.getText().isEmpty()) {
+                    showAlert(Alert.AlertType.ERROR, gridPane.getScene().getWindow(), "Form Error!", "Please enter a phone");
+                    return;
+                }
+                if (cb.getSelectionModel().getSelectedItem()==null) {
+                    showAlert(Alert.AlertType.ERROR, gridPane.getScene().getWindow(), "Form Error!", "Please enter a role ");
+                    return;
+                }
+                user=new User(usernameField.getText(), CryptWithMD5.cryptWithMD5(passwordField.getText()),FullNumeField.getText(),emailField.getText(),PhoneFiled.getText(),cb.getSelectionModel().getSelectedItem().toString());
+                userSer=new UserSer();
+                try {
+                    userSer.addUsers(user);
+                } catch (UsernameAlreadyExistsException e) {
+                    showAlert(Alert.AlertType.ERROR, gridPane.getScene().getWindow(), "Form Error!", "Username-ul exista deja!");
+                    return;
+                }
+
 
                 showAlert(Alert.AlertType.CONFIRMATION, gridPane.getScene().getWindow(), "Registration Successful!", "Welcome " + usernameField.getText());
             }
