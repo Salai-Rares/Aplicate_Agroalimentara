@@ -41,13 +41,7 @@ public class UserSer {
                 throw new UsernameAlreadyExistsException(username);
         }
     }
-    public   boolean checkRole (String role)  {
-        for (User user : users) {
-            if (Objects.equals(role, user.getRol()))
-                return true;
-        }
-        return false;
-    }
+
 
     public void addUsers(User u) throws UsernameAlreadyExistsException {
 
