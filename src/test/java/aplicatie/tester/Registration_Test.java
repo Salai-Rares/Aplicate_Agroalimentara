@@ -1,9 +1,5 @@
-package GUI;
+package aplicatie.tester;
 
-import Exceptions.UsernameAlreadyExistsException;
-import JSON.CryptWithMD5;
-import JSON.User;
-import JSON.UserSer;
 import javafx.application.Application;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
@@ -13,17 +9,14 @@ import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
-import javafx.scene.layout.ColumnConstraints;
-import javafx.scene.layout.GridPane;
-import javafx.scene.layout.Priority;
+import javafx.scene.layout.*;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.stage.Stage;
 import javafx.stage.Window;
 
-public class Registration extends Application {
-    private UserSer userSer;
-    private User user;
+public class Registration_Test extends Application {
+
     @Override
     public void start(Stage primaryStage) throws Exception {
         primaryStage.setTitle("Inregistrare Aplicatie Agroalimentara");
@@ -64,7 +57,7 @@ public class Registration extends Application {
         columnOneConstraints.setHalignment(HPos.RIGHT);
 
         // columnTwoConstraints will be applied to all the nodes placed in column two.
-        ColumnConstraints columnTwoConstrains = new ColumnConstraints(200, 200, Double.MAX_VALUE);
+        ColumnConstraints columnTwoConstrains = new ColumnConstraints(200,200, Double.MAX_VALUE);
         columnTwoConstrains.setHgrow(Priority.ALWAYS);
 
         gridPane.getColumnConstraints().addAll(columnOneConstraints, columnTwoConstrains);
@@ -76,18 +69,18 @@ public class Registration extends Application {
         // Add Header
         Label headerLabel = new Label("Creare Cont");
         headerLabel.setFont(Font.font("Arial", FontWeight.BOLD, 24));
-        gridPane.add(headerLabel, 0, 0, 2, 1);
+        gridPane.add(headerLabel, 0,0,2,1);
         GridPane.setHalignment(headerLabel, HPos.CENTER);
-        GridPane.setMargin(headerLabel, new Insets(20, 0, 20, 0));
+        GridPane.setMargin(headerLabel, new Insets(20, 0,20,0));
 
         // Add Email Label
         Label emailLabel = new Label("Email ID : ");
-        gridPane.add(emailLabel, 0, 1);
+        gridPane.add(emailLabel, 0,1);
 
         // Add Email Text Field
         TextField emailField = new TextField();
         emailField.setPrefHeight(40);
-        gridPane.add(emailField, 1, 1);
+        gridPane.add(emailField, 1,1);
 
 
         // Add Username Label
@@ -133,7 +126,8 @@ public class Registration extends Application {
                 "Cumparator",
                 new Separator(), "Magazin")
         );
-        gridPane.add(cb, 1, 6);
+        gridPane.add(cb,1,6);
+
 
 
         // Add Submit Button
@@ -143,46 +137,23 @@ public class Registration extends Application {
         submitButton.setPrefWidth(100);
         gridPane.add(submitButton, 0, 10, 2, 1);
         GridPane.setHalignment(submitButton, HPos.CENTER);
-        GridPane.setMargin(submitButton, new Insets(20, 0, 20, 0));
-
+        GridPane.setMargin(submitButton, new Insets(20, 0,20,0));
 
         submitButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
-            public void handle(ActionEvent event)  {
-
-                if (usernameField.getText().isEmpty()) {
-                    showAlert(Alert.AlertType.ERROR, gridPane.getScene().getWindow(), "Registration Error!", "Please enter your username");
+            public void handle(ActionEvent event) {
+                if(usernameField.getText().isEmpty()) {
+                    showAlert(Alert.AlertType.ERROR, gridPane.getScene().getWindow(), "Form Error!", "Please enter your name");
                     return;
                 }
-                if (emailField.getText().isEmpty()) {
-                    showAlert(Alert.AlertType.ERROR, gridPane.getScene().getWindow(), "Registration Error!", "Please enter your email id");
+                if(emailField.getText().isEmpty()) {
+                    showAlert(Alert.AlertType.ERROR, gridPane.getScene().getWindow(), "Form Error!", "Please enter your email id");
                     return;
                 }
-                if (passwordField.getText().isEmpty()) {
-                    showAlert(Alert.AlertType.ERROR, gridPane.getScene().getWindow(), "Registration Error!", "Please enter a password");
+                if(passwordField.getText().isEmpty()) {
+                    showAlert(Alert.AlertType.ERROR, gridPane.getScene().getWindow(), "Form Error!", "Please enter a password");
                     return;
                 }
-                if (FullNumeField.getText().isEmpty()) {
-                    showAlert(Alert.AlertType.ERROR, gridPane.getScene().getWindow(), "Registration Error!", "Please enter a name");
-                    return;
-                }
-                if (PhoneFiled.getText().isEmpty()) {
-                    showAlert(Alert.AlertType.ERROR, gridPane.getScene().getWindow(), "Registration Error!", "Please enter a phone");
-                    return;
-                }
-                if (cb.getSelectionModel().getSelectedItem()==null) {
-                    showAlert(Alert.AlertType.ERROR, gridPane.getScene().getWindow(), "Registration Error!", "Please enter a role ");
-                    return;
-                }
-                user=new User(usernameField.getText(), CryptWithMD5.cryptWithMD5(passwordField.getText()),FullNumeField.getText(),emailField.getText(),PhoneFiled.getText(),cb.getSelectionModel().getSelectedItem().toString());
-                userSer=new UserSer();
-                try {
-                    userSer.addUsers(user);
-                } catch (UsernameAlreadyExistsException e) {
-                    showAlert(Alert.AlertType.ERROR, gridPane.getScene().getWindow(), "Registration Error!", "Username-ul exista deja!");
-                    return;
-                }
-
 
                 showAlert(Alert.AlertType.CONFIRMATION, gridPane.getScene().getWindow(), "Registration Successful!", "Welcome " + usernameField.getText());
             }
@@ -197,8 +168,8 @@ public class Registration extends Application {
         alert.initOwner(owner);
         alert.show();
     }
+
     public static void main(String[] args) {
         launch(args);
     }
 }
-

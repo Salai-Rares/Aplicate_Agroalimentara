@@ -1,6 +1,7 @@
 package JSON;
 
 import Exceptions.UsernameAlreadyExistsException;
+import Exceptions.UsernameOrPasswordWrongException;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import java.io.IOException;
@@ -41,6 +42,7 @@ public class UserSer {
         }
     }
 
+
     public void addUsers(User u) throws UsernameAlreadyExistsException {
 
       UserSer.FromAtoO();
@@ -58,19 +60,35 @@ public class UserSer {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
     }
+    public  String  checkCredentials(String username,String password) throws UsernameOrPasswordWrongException {
+      UserSer.FromAtoO();
+
+      for(User u :users){
+          if((u.getUsername().equals(username))&&(u.getPassword().equals(CryptWithMD5.cryptWithMD5(password)))) {
+              String rol = u.getRol();
+              return rol;
+          }
+      }
+           throw new UsernameOrPasswordWrongException();
+    }
+
 
 
     public static void main(String[] args) {
         User u1=new User("rare",CryptWithMD5.cryptWithMD5("ratata"),"dasd","s","d","k");
-        User u2=new User("rare","df2s",CryptWithMD5.cryptWithMD5("darsd"),"s","d","k");
+        User u2=new User("rares","df2s",CryptWithMD5.cryptWithMD5("darsd"),"s","d","k");
         UserSer userSer=new UserSer();
         try {
             userSer.addUsers(u1);
             userSer.addUsers(u2);
         }catch (UsernameAlreadyExistsException e){
             System.out.println("fds");;
+        }
+        try{
+          userSer.checkCredentials("fifi","fifi");
+        }catch (UsernameOrPasswordWrongException ex){
+            System.out.println("mama");
         }
 
 

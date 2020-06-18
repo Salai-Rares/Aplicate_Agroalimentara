@@ -1,6 +1,7 @@
 package GUI;
 
 import Exceptions.UsernameAlreadyExistsException;
+import Exceptions.UsernameOrPasswordWrongException;
 import JSON.CryptWithMD5;
 import JSON.User;
 import JSON.UserSer;
@@ -21,12 +22,17 @@ import javafx.scene.text.FontWeight;
 import javafx.stage.Stage;
 import javafx.stage.Window;
 
-public class Registration extends Application {
-    private UserSer userSer;
-    private User user;
+import java.util.Objects;
+
+public class LoginUser extends Application {
+
+private UserSer userSer;
+   private Stage primaryStage =new Stage();
+   private String role;
     @Override
     public void start(Stage primaryStage) throws Exception {
-        primaryStage.setTitle("Inregistrare Aplicatie Agroalimentara");
+        this.primaryStage=primaryStage;
+        primaryStage.setTitle("Login Aplicatie Agroalimentara");
 
         // Create the registration form grid pane
         GridPane gridPane = createRegistrationFormPane();
@@ -38,12 +44,14 @@ public class Registration extends Application {
         primaryStage.setScene(scene);
 
         primaryStage.show();
+
     }
 
 
     private GridPane createRegistrationFormPane() {
         // Instantiate a new Grid Pane
         GridPane gridPane = new GridPane();
+
 
         // Position the pane at the center of the screen, both vertically and horizontally
         gridPane.setAlignment(Pos.CENTER);
@@ -74,20 +82,11 @@ public class Registration extends Application {
 
     private void addUIControls(GridPane gridPane) {
         // Add Header
-        Label headerLabel = new Label("Creare Cont");
+        Label headerLabel = new Label("Login");
         headerLabel.setFont(Font.font("Arial", FontWeight.BOLD, 24));
         gridPane.add(headerLabel, 0, 0, 2, 1);
         GridPane.setHalignment(headerLabel, HPos.CENTER);
         GridPane.setMargin(headerLabel, new Insets(20, 0, 20, 0));
-
-        // Add Email Label
-        Label emailLabel = new Label("Email ID : ");
-        gridPane.add(emailLabel, 0, 1);
-
-        // Add Email Text Field
-        TextField emailField = new TextField();
-        emailField.setPrefHeight(40);
-        gridPane.add(emailField, 1, 1);
 
 
         // Add Username Label
@@ -108,36 +107,11 @@ public class Registration extends Application {
         passwordField.setPrefHeight(40);
         gridPane.add(passwordField, 1, 3);
 
-        // Add FullName Label
-        Label FullNumeLabel = new Label("Nume Intreg : ");
-        gridPane.add(FullNumeLabel, 0, 4);
 
-        // Add FullName Field
-        TextField FullNumeField = new TextField();
-        FullNumeField.setPrefHeight(40);
-        gridPane.add(FullNumeField, 1, 4);
-
-
-        // Add Phone Label
-        Label PhoneLabel = new Label("Telefon : ");
-        gridPane.add(PhoneLabel, 0, 5);
-
-        // Add Phone Field
-        TextField PhoneFiled = new TextField();
-        PhoneFiled.setPrefHeight(40);
-        gridPane.add(PhoneFiled, 1, 5);
-
-        // Add Role ChoiceBox
-        ChoiceBox cb = new ChoiceBox();
-        cb.setItems(FXCollections.observableArrayList(
-                "Cumparator",
-                new Separator(), "Magazin")
-        );
-        gridPane.add(cb, 1, 6);
 
 
         // Add Submit Button
-        Button submitButton = new Button("Submit");
+        Button submitButton = new Button("Login");
         submitButton.setPrefHeight(40);
         submitButton.setDefaultButton(true);
         submitButton.setPrefWidth(100);
@@ -150,41 +124,31 @@ public class Registration extends Application {
             @Override
             public void handle(ActionEvent event)  {
 
+        userSer=new UserSer();
                 if (usernameField.getText().isEmpty()) {
-                    showAlert(Alert.AlertType.ERROR, gridPane.getScene().getWindow(), "Registration Error!", "Please enter your username");
+                    showAlert(Alert.AlertType.ERROR, gridPane.getScene().getWindow(), "Login Error!", "Please enter your username");
                     return;
                 }
-                if (emailField.getText().isEmpty()) {
-                    showAlert(Alert.AlertType.ERROR, gridPane.getScene().getWindow(), "Registration Error!", "Please enter your email id");
-                    return;
-                }
+
                 if (passwordField.getText().isEmpty()) {
-                    showAlert(Alert.AlertType.ERROR, gridPane.getScene().getWindow(), "Registration Error!", "Please enter a password");
+                    showAlert(Alert.AlertType.ERROR, gridPane.getScene().getWindow(), "Login Error!", "Please enter a password");
                     return;
                 }
-                if (FullNumeField.getText().isEmpty()) {
-                    showAlert(Alert.AlertType.ERROR, gridPane.getScene().getWindow(), "Registration Error!", "Please enter a name");
-                    return;
-                }
-                if (PhoneFiled.getText().isEmpty()) {
-                    showAlert(Alert.AlertType.ERROR, gridPane.getScene().getWindow(), "Registration Error!", "Please enter a phone");
-                    return;
-                }
-                if (cb.getSelectionModel().getSelectedItem()==null) {
-                    showAlert(Alert.AlertType.ERROR, gridPane.getScene().getWindow(), "Registration Error!", "Please enter a role ");
-                    return;
-                }
-                user=new User(usernameField.getText(), CryptWithMD5.cryptWithMD5(passwordField.getText()),FullNumeField.getText(),emailField.getText(),PhoneFiled.getText(),cb.getSelectionModel().getSelectedItem().toString());
-                userSer=new UserSer();
                 try {
-                    userSer.addUsers(user);
-                } catch (UsernameAlreadyExistsException e) {
-                    showAlert(Alert.AlertType.ERROR, gridPane.getScene().getWindow(), "Registration Error!", "Username-ul exista deja!");
+                  String rol=userSer.checkCredentials(usernameField.getText(),passwordField.getText());
+                    primaryStage.close();
+                    Registration r=new Registration();
+                   if(Objects.equals(rol,"Magazin"))
+                    r.start(primaryStage);
+                }catch (UsernameOrPasswordWrongException ex){
+                    showAlert(Alert.AlertType.ERROR, gridPane.getScene().getWindow(), "Login Error!", "Username or password wrong!");
                     return;
+                } catch (Exception e) {
+                    e.printStackTrace();
                 }
 
-
-                showAlert(Alert.AlertType.CONFIRMATION, gridPane.getScene().getWindow(), "Registration Successful!", "Welcome " + usernameField.getText());
+                showAlert(Alert.AlertType.CONFIRMATION, gridPane.getScene().getWindow(), "Logged in succesfully!", "Welcome " + usernameField.getText());
+               
             }
         });
     }
