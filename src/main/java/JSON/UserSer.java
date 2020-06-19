@@ -2,8 +2,11 @@ package JSON;
 
 import Exceptions.UsernameAlreadyExistsException;
 import Exceptions.UsernameOrPasswordWrongException;
+import Models.User;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+
+import java.io.File;
 import java.io.IOException;
 import java.io.Reader;
 import java.io.Writer;
@@ -21,17 +24,17 @@ public class UserSer {
   protected Writer write;
 
   public static void FromAtoO(){
-      try{
+              try{
 
-          Reader reader= Files.newBufferedReader(Paths.get("User1.json"));
-          List<User> u = Arrays.asList(gson.fromJson(reader, User[].class));
-          users.removeAll(users);
-          users.addAll(u);
-          reader.close();
+                  Reader reader= Files.newBufferedReader(Paths.get("Users_db//Users.json"));
+                  List<User> u = Arrays.asList(gson.fromJson(reader, User[].class));
+                  users.removeAll(users);
+                  users.addAll(u);
+                  reader.close();
 
 
-      }catch (Exception ex){
-          return;
+              }catch (Exception ex){
+                  return;
       }
 
   }
@@ -47,8 +50,26 @@ public class UserSer {
 
       UserSer.FromAtoO();
       checkUserDoesNotAlreadyExist(u.getUsername());
+        File theDir = new File("Users_db");
+
+// if the directory does not exist, create it
+        if (!theDir.exists()) {
+            System.out.println("creating directory: " + theDir.getName());
+            boolean result = false;
+
+            try{
+                theDir.mkdir();
+                result = true;
+            }
+            catch(SecurityException se){
+                //handle it
+            }
+            if(result) {
+                System.out.println("DIR created");
+            }
+        }
         try {
-            write = Files.newBufferedWriter(Paths.get("User1.json"));
+            write = Files.newBufferedWriter(Paths.get("Users_db//Users.json"));
         } catch (IOException e) {
             e.printStackTrace();
         }
