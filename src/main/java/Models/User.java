@@ -1,7 +1,6 @@
-package JSON;
+package Models;
 
 import com.google.gson.annotations.SerializedName;
-import org.json.JSONObject;
 
 public class User {
     @SerializedName("username")
