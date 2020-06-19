@@ -1,12 +1,8 @@
 package GUI;
 
-import Exceptions.UsernameAlreadyExistsException;
 import Exceptions.UsernameOrPasswordWrongException;
-import JSON.CryptWithMD5;
-import JSON.User;
 import JSON.UserSer;
 import javafx.application.Application;
-import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.HPos;
@@ -120,36 +116,33 @@ private UserSer userSer;
         GridPane.setMargin(submitButton, new Insets(20, 0, 20, 0));
 
 
-        submitButton.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event)  {
+        submitButton.setOnAction(event -> {
 
-        userSer=new UserSer();
-                if (usernameField.getText().isEmpty()) {
-                    showAlert(Alert.AlertType.ERROR, gridPane.getScene().getWindow(), "Login Error!", "Please enter your username");
-                    return;
-                }
-
-                if (passwordField.getText().isEmpty()) {
-                    showAlert(Alert.AlertType.ERROR, gridPane.getScene().getWindow(), "Login Error!", "Please enter a password");
-                    return;
-                }
-                try {
-                  String rol=userSer.checkCredentials(usernameField.getText(),passwordField.getText());
-                    primaryStage.close();
-                    Registration r=new Registration();
-                   if(Objects.equals(rol,"Magazin"))
-                    r.start(primaryStage);
-                }catch (UsernameOrPasswordWrongException ex){
-                    showAlert(Alert.AlertType.ERROR, gridPane.getScene().getWindow(), "Login Error!", "Username or password wrong!");
-                    return;
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-
-                showAlert(Alert.AlertType.CONFIRMATION, gridPane.getScene().getWindow(), "Logged in succesfully!", "Welcome " + usernameField.getText());
-               
+    userSer=new UserSer();
+            if (usernameField.getText().isEmpty()) {
+                showAlert(Alert.AlertType.ERROR, gridPane.getScene().getWindow(), "Login Error!", "Please enter your username");
+                return;
             }
+
+            if (passwordField.getText().isEmpty()) {
+                showAlert(Alert.AlertType.ERROR, gridPane.getScene().getWindow(), "Login Error!", "Please enter a password");
+                return;
+            }
+            try {
+              String rol=userSer.checkCredentials(usernameField.getText(),passwordField.getText());
+                primaryStage.close();
+                Registration r=new Registration();
+               if(Objects.equals(rol,"Magazin"))
+                r.start(primaryStage);
+            }catch (UsernameOrPasswordWrongException ex){
+                showAlert(Alert.AlertType.ERROR, gridPane.getScene().getWindow(), "Login Error!", "Username or password wrong!");
+                return;
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+            showAlert(Alert.AlertType.CONFIRMATION, gridPane.getScene().getWindow(), "Logged in succesfully!", "Welcome " + usernameField.getText());
+
         });
     }
 
