@@ -2,7 +2,7 @@ package GUI;
 
 import Exceptions.UsernameAlreadyExistsException;
 import JSON.CryptWithMD5;
-import JSON.User;
+import Models.User;
 import JSON.UserSer;
 import javafx.application.Application;
 import javafx.collections.FXCollections;
@@ -33,7 +33,7 @@ public class Registration extends Application {
         // Add UI controls to the registration form grid pane
         addUIControls(gridPane);
         // Create a scene with registration form grid pane as the root node
-        Scene scene = new Scene(gridPane, 1000, 700);
+        Scene scene = new Scene(gridPane, 800, 500);
         // Set the scene in primary stage
         primaryStage.setScene(scene);
 
@@ -83,6 +83,7 @@ public class Registration extends Application {
         // Add Email Label
         Label emailLabel = new Label("Email ID : ");
         gridPane.add(emailLabel, 0, 1);
+        emailLabel.autosize();
 
         // Add Email Text Field
         TextField emailField = new TextField();
@@ -108,24 +109,35 @@ public class Registration extends Application {
         passwordField.setPrefHeight(40);
         gridPane.add(passwordField, 1, 3);
 
+
+        // Add Password Label
+        Label passwordLabel2 = new Label("Confirm : ");
+        gridPane.add(passwordLabel2, 0, 4);
+
+
+        // Add Password Field
+        PasswordField passwordField2 = new PasswordField();
+        passwordField2.setPrefHeight(40);
+        gridPane.add(passwordField2, 1, 4);
+
         // Add FullName Label
         Label FullNumeLabel = new Label("Nume Intreg : ");
-        gridPane.add(FullNumeLabel, 0, 4);
+        gridPane.add(FullNumeLabel, 0, 5);
 
         // Add FullName Field
         TextField FullNumeField = new TextField();
         FullNumeField.setPrefHeight(40);
-        gridPane.add(FullNumeField, 1, 4);
+        gridPane.add(FullNumeField, 1, 5);
 
 
         // Add Phone Label
         Label PhoneLabel = new Label("Telefon : ");
-        gridPane.add(PhoneLabel, 0, 5);
+        gridPane.add(PhoneLabel, 0, 6);
 
         // Add Phone Field
         TextField PhoneFiled = new TextField();
         PhoneFiled.setPrefHeight(40);
-        gridPane.add(PhoneFiled, 1, 5);
+        gridPane.add(PhoneFiled, 1, 6);
 
         // Add Role ChoiceBox
         ChoiceBox cb = new ChoiceBox();
@@ -133,7 +145,7 @@ public class Registration extends Application {
                 "Cumparator",
                 new Separator(), "Magazin")
         );
-        gridPane.add(cb, 1, 6);
+        gridPane.add(cb, 1, 7);
 
 
         // Add Submit Button
@@ -174,6 +186,9 @@ public class Registration extends Application {
                     showAlert(Alert.AlertType.ERROR, gridPane.getScene().getWindow(), "Registration Error!", "Please enter a role ");
                     return;
                 }
+                if(!passwordField2.getText().equals(passwordField.getText())){
+                    showAlert(Alert.AlertType.ERROR, gridPane.getScene().getWindow(), "Registration Error!", "Parolele introduse nu coincid!");
+                    return;}
                 user=new User(usernameField.getText(), CryptWithMD5.cryptWithMD5(passwordField.getText()),FullNumeField.getText(),emailField.getText(),PhoneFiled.getText(),cb.getSelectionModel().getSelectedItem().toString());
                 userSer=new UserSer();
                 try {
