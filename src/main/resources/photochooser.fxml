@@ -27,13 +27,14 @@
             <Font size="18.0" />
          </font>
       </Label>
-      <TextField fx:id="nume_field" layoutX="169.0" layoutY="248.0" prefHeight="26.0" prefWidth="339.0" />
-      <TextField fx:id="pret_field" layoutX="169.0" layoutY="281.0" prefHeight="26.0" prefWidth="339.0" />
-      <TextField fx:id="descriere_field" layoutX="169.0" layoutY="311.0" prefHeight="26.0" prefWidth="339.0" />
+      <TextField fx:id="nume_field" layoutX="176.0" layoutY="246.0" prefHeight="26.0" prefWidth="339.0" />
+      <TextField fx:id="pret_field" layoutX="176.0" layoutY="280.0" prefHeight="26.0" prefWidth="339.0" />
+      <TextField fx:id="descriere_field" layoutX="176.0" layoutY="310.0" prefHeight="26.0" prefWidth="339.0" />
       <Label layoutX="41.0" layoutY="111.0" prefHeight="36.0" prefWidth="135.0" text="Incarcati o poza:">
          <font>
             <Font size="18.0" />
          </font>
       </Label>
+      <FlowPane fx:id="flow" layoutX="176.0" layoutY="22.0" prefHeight="225.0" prefWidth="325.0" />
    </children>
 </AnchorPane>
