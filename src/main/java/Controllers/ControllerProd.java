@@ -3,6 +3,7 @@ package Controllers;
 import AbstractClasses.MakeaDir;
 import AbstractClasses.SavePhotos;
 import Exceptions.UsernameAlreadyExistsException;
+import JSON.CommunicationClass;
 import JSON.UserSer;
 import Models.Produs;
 import Models.User;
@@ -10,6 +11,7 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
@@ -17,6 +19,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.FlowPane;
 import javafx.stage.FileChooser;
 import javafx.stage.Window;
 
@@ -37,6 +40,7 @@ public class ControllerProd{
     protected static Gson gson=new GsonBuilder().setPrettyPrinting().create();
     protected static List<Produs> produse=new ArrayList<>();
     protected Writer write;
+    private String id;
 @FXML
 private Button btn;
 @FXML
@@ -47,10 +51,15 @@ private javafx.scene.control.TextField nume_field;
 private TextField pret_field;
 @FXML
 private AnchorPane anch;
-
-private ControllerProd controllerProd;
+@FXML
+private FlowPane flow;
+    private ControllerProd controllerProd;
+    public void setId(String id){
+        this.id=id;
+    }
 
 public void ButtonAction(ActionEvent event){
+
 
     controllerProd=new ControllerProd();
     if (nume_field.getText().isEmpty()) {
@@ -65,11 +74,23 @@ public void ButtonAction(ActionEvent event){
         showAlert(Alert.AlertType.ERROR, anch.getScene().getWindow(), "Eroare la creare produs!", "Introduceti o descriere!");
         return;
     }
-   Produs produs=new Produs(nume_field.getText(),Integer.parseInt(pret_field.getText()),descriere_field.getText(),"nvm");
-    SavePhotos.SavePhotos(produs,"Photos");
+   Produs produs=new Produs(nume_field.getText(),Integer.parseInt(pret_field.getText()),descriere_field.getText(),"nvm", CommunicationClass.getUsername());
+   String path= SavePhotos.SavePhotos(produs,"Photos");
+    Image img=new Image(path);
+    ImageView imageView=new ImageView();
+    imageView.setImage(img);
+    imageView.setFitWidth(260);
+    imageView.setFitHeight(210);
+
+    imageView.setSmooth(true);
+    imageView.setCache(true);
+    flow.getChildren().add(imageView);
+
         controllerProd.addProdus(produs);
 
+
 }
+
     private void showAlert(Alert.AlertType alertType, Window owner, String title, String message) {
         Alert alert = new Alert(alertType);
         alert.setTitle(title);
