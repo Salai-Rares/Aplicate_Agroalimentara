@@ -1,6 +1,9 @@
 package GUI;
 
+import Controllers.ControllerProd;
+import Controllers.ProdMain;
 import Exceptions.UsernameOrPasswordWrongException;
+import JSON.CommunicationClass;
 import JSON.UserSer;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
@@ -23,8 +26,19 @@ import java.util.Objects;
 public class LoginUser extends Application {
 
 private UserSer userSer;
-   private Stage primaryStage =new Stage();
-   private String role;
+private ProdMain prodMain;
+private Stage primaryStage =new Stage();
+private String username;
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+
     @Override
     public void start(Stage primaryStage) throws Exception {
         this.primaryStage=primaryStage;
@@ -131,9 +145,10 @@ private UserSer userSer;
             try {
               String rol=userSer.checkCredentials(usernameField.getText(),passwordField.getText());
                 primaryStage.close();
-                Registration r=new Registration();
-               if(Objects.equals(rol,"Magazin"))
-                r.start(primaryStage);
+                prodMain=new ProdMain();
+               if(Objects.equals(rol,"Magazin")){
+                   CommunicationClass.setUsername(usernameField.getText());
+                prodMain.start(primaryStage);}
             }catch (UsernameOrPasswordWrongException ex){
                 showAlert(Alert.AlertType.ERROR, gridPane.getScene().getWindow(), "Login Error!", "Username or password wrong!");
                 return;

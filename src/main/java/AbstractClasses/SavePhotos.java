@@ -11,8 +11,9 @@ import java.io.File;
 import java.io.IOException;
 
 public abstract class SavePhotos  {
-    public static void SavePhotos(Object a,String nume_director){
+    public static String SavePhotos(Object a,String nume_director){
         FileChooser fc=new FileChooser();
+        String path = new String();
         fc.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("JPG files","*.jpg"),
                 new FileChooser.ExtensionFilter("PNG files","*.png"));
 
@@ -27,15 +28,16 @@ public abstract class SavePhotos  {
                 String name = selectedFile.getName();
                 String extension = name.substring(1 + name.lastIndexOf(".")).toLowerCase();
                 BufferedImage bufferedImage = SwingFXUtils.fromFXImage(img, null);
-                if(a instanceof Produs)
-                    ((Produs) a).setPath("Photos//"+name+"."+"jpg");
-
-
-                ImageIO.write(bufferedImage, extension, new File(nume_director+"//"+name+"."+extension));
+                if(a instanceof Produs) {
+                    ((Produs) a).setPath("file:Photos/" + name );
+                path="file:Photos/"+name;
+                }
+                ImageIO.write(bufferedImage, extension, new File(nume_director+"//"+name/*+"."+extension*/));
 
             }
        }catch (IOException e){
             e.printStackTrace();
         }
+        return path;
     }
 }
