@@ -5,6 +5,7 @@ public class Produs {
     private double pret;
     private String picture_path;
     private String descriere;
+    private String id;
 
     public String getNume() {
         return nume;
@@ -38,10 +39,21 @@ public class Produs {
         this.descriere = descriere;
     }
 
-    public Produs(String nume, double pret, String descriere,String path) {
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public Produs(String nume, double pret, String descriere, String path, String id) {
         this.nume = nume;
         this.pret = pret;
         this.descriere = descriere;
         this.picture_path=path;
+        this.id=id;
+
     }
 }

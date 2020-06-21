@@ -23,5 +23,6 @@ private AnchorPane anchorPane;
         Scene scene =new Scene(anchorPane);
         primaryStage.setScene(scene);
         primaryStage.show();
+
     }
 }
