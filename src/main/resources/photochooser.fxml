@@ -6,7 +6,7 @@
 
 <AnchorPane fx:id="anch" prefHeight="437.0" prefWidth="585.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.ControllerProd">
    <children>
-      <Button fx:id="btn" layoutX="41.0" layoutY="164.0" mnemonicParsing="false" onAction="#ButtonAction" prefHeight="36.0" prefWidth="78.0" text="Poza" textFill="#0a91e5" />
+      <Button fx:id="btn" layoutX="41.0" layoutY="164.0" mnemonicParsing="false" onAction="#ButtonAction" prefHeight="36.0" prefWidth="78.0" text="Poza" textFill="#e5b88c" />
       <Label layoutX="109.0" layoutY="-72.0" prefHeight="78.0" prefWidth="290.0" text="Creati un produs" textFill="#1582c2">
          <font>
             <Font name="System Bold" size="34.0" />
@@ -36,5 +36,6 @@
          </font>
       </Label>
       <FlowPane fx:id="flow" layoutX="176.0" layoutY="22.0" prefHeight="225.0" prefWidth="325.0" />
+      <Label accessibleRole="BUTTON" layoutX="254.0" layoutY="367.0" onMouseClicked="#LabelAction" onMouseReleased="#LabelAction2" prefHeight="18.0" prefWidth="128.0" text="Create an account" />
    </children>
 </AnchorPane>
