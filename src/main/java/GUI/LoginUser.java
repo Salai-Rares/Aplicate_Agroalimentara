@@ -13,6 +13,9 @@ import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Priority;
@@ -21,6 +24,9 @@ import javafx.scene.text.FontWeight;
 import javafx.stage.Stage;
 import javafx.stage.Window;
 
+import javax.swing.*;
+import javax.swing.border.Border;
+import java.awt.*;
 import java.util.Objects;
 
 public class LoginUser extends Application {
@@ -116,9 +122,6 @@ private String username;
         PasswordField passwordField = new PasswordField();
         passwordField.setPrefHeight(40);
         gridPane.add(passwordField, 1, 3);
-
-
-
 
         // Add Submit Button
         Button submitButton = new Button("Login");

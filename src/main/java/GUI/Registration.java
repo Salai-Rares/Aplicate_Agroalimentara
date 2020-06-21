@@ -35,6 +35,7 @@ public class Registration extends Application {
         // Create a scene with registration form grid pane as the root node
         Scene scene = new Scene(gridPane, 800, 500);
         // Set the scene in primary stage
+        scene.getStylesheets().add("Register.css");
         primaryStage.setScene(scene);
 
         primaryStage.show();
@@ -75,13 +76,16 @@ public class Registration extends Application {
     private void addUIControls(GridPane gridPane) {
         // Add Header
         Label headerLabel = new Label("Creare Cont");
-        headerLabel.setFont(Font.font("Arial", FontWeight.BOLD, 24));
+        headerLabel.setFont(Font.font("Arial", FontWeight.BOLD, 50));
+
+        headerLabel.setStyle("-fx-text-fill: #E8E8E8");
         gridPane.add(headerLabel, 0, 0, 2, 1);
         GridPane.setHalignment(headerLabel, HPos.CENTER);
         GridPane.setMargin(headerLabel, new Insets(20, 0, 20, 0));
 
         // Add Email Label
         Label emailLabel = new Label("Email ID : ");
+
         gridPane.add(emailLabel, 0, 1);
         emailLabel.autosize();
 
@@ -93,6 +97,7 @@ public class Registration extends Application {
 
         // Add Username Label
         Label usernameLabel = new Label("Username : ");
+
         gridPane.add(usernameLabel, 0, 2);
 
         // Add Username Text Field
@@ -102,6 +107,7 @@ public class Registration extends Application {
 
         // Add Password Label
         Label passwordLabel = new Label("Password : ");
+
         gridPane.add(passwordLabel, 0, 3);
 
         // Add Password Field
@@ -112,6 +118,7 @@ public class Registration extends Application {
 
         // Add Password Label
         Label passwordLabel2 = new Label("Confirm : ");
+
         gridPane.add(passwordLabel2, 0, 4);
 
 
@@ -122,6 +129,7 @@ public class Registration extends Application {
 
         // Add FullName Label
         Label FullNumeLabel = new Label("Nume Intreg : ");
+
         gridPane.add(FullNumeLabel, 0, 5);
 
         // Add FullName Field
@@ -132,6 +140,7 @@ public class Registration extends Application {
 
         // Add Phone Label
         Label PhoneLabel = new Label("Telefon : ");
+
         gridPane.add(PhoneLabel, 0, 6);
 
         // Add Phone Field

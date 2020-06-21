@@ -17,6 +17,7 @@ public abstract class MakeaDir {
             }
             catch(SecurityException se){
                 //handle it
+                System.out.println("couldnt create the dir");
             }
             if(result) {
                 System.out.println("DIR created");

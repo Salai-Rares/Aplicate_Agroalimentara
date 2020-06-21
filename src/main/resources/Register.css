@@ -1,0 +1,18 @@
+.root{
+    -fx-background-color: #1a1410;
+    -fx-font-size: 10pt;
+}
+.label{
+    -fx-text-fill: #970c0c;
+}
+.button{
+    -fx-background-color:linear-gradient(#ea1313,#f784a8);
+    -fx-background-radius: 4;
+}
+
+#overritexD{
+    -fx-background-color: #ea1313;
+}
+.button-blue{
+    -fx-background-color: #7cafc2;
+}

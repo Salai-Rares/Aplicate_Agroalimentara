@@ -2,4 +2,7 @@
 *.iml
 target
 build
+Photos/
+Produse_db/
+Users_db/
 

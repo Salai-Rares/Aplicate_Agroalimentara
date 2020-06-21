@@ -18,7 +18,9 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Border;
 import javafx.scene.layout.FlowPane;
 import javafx.stage.FileChooser;
 import javafx.stage.Window;
@@ -56,6 +58,15 @@ private FlowPane flow;
     private ControllerProd controllerProd;
     public void setId(String id){
         this.id=id;
+    }
+
+    public void LabelAction(MouseEvent event){
+        System.out.println("asdasd");
+
+    }
+    public void LabelAction2(MouseEvent event){
+        System.out.println("zafa");
+
     }
 
 public void ButtonAction(ActionEvent event){
