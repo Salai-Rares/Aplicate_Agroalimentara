@@ -1,48 +1,36 @@
 package Controllers;
 
-import AbstractClasses.MakeaDir;
+import AbstractClasses.AlertBox;
 import AbstractClasses.SavePhotos;
-import Exceptions.UsernameAlreadyExistsException;
+import Exceptions.NameOfCategoryAlreadyExistsException;
+import Exceptions.NameOfProducAlreadyExistsException;
 import JSON.CommunicationClass;
-import JSON.UserSer;
+import Models.Categorie;
+import Models.Magazin;
 import Models.Produs;
-import Models.User;
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import javafx.embed.swing.SwingFXUtils;
 import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.Border;
 import javafx.scene.layout.FlowPane;
-import javafx.stage.FileChooser;
-import javafx.stage.Window;
+import javafx.stage.Stage;
 
-import javax.imageio.ImageIO;
-import java.awt.*;
-import java.awt.image.BufferedImage;
-import java.io.File;
 import java.io.IOException;
-import java.io.Reader;
 import java.io.Writer;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.Objects;
+
+import static AbstractClasses.AlertBox.showAlert;
+import static Controllers.ControllerMag.gson;
+import static Controllers.ControllerMag.magazine;
 
 public class ControllerProd{
-    protected static Gson gson=new GsonBuilder().setPrettyPrinting().create();
-    protected static List<Produs> produse=new ArrayList<>();
-    protected Writer write;
-    private String id;
+/*
 @FXML
 private Button btn;
 @FXML
@@ -55,92 +43,128 @@ private TextField pret_field;
 private AnchorPane anch;
 @FXML
 private FlowPane flow;
-    private ControllerProd controllerProd;
-    public void setId(String id){
-        this.id=id;
+@FXML
+private TextField categorie;*/
+    @FXML
+    private TextField categoriefx;
+    @FXML
+    private AnchorPane anchfx;
+    @FXML
+    private TextField numefx;
+    @FXML
+    private TextField pretfx;
+    @FXML
+    private TextField descrierefx;
+    @FXML
+    private Button inchidefx;
+    @FXML
+    private Button salveazafx;
+    private static String cale;
+
+    private static void checkNameDoesNotAlreadyExist(String nume) throws NameOfProducAlreadyExistsException {
+        for (Magazin m : magazine)
+            if(m.getId().equals(CommunicationClass.getUsername()))
+                for(Categorie categorie:m.getCategori())
+                 for(Produs produs:categorie.getProduse()){
+                     if(Objects.equals(produs.getNume(),nume))
+                        throw new NameOfProducAlreadyExistsException();
+
+    }}
+    public void inchide_fereastra(MouseEvent event){
+        Stage stage = (Stage) inchidefx.getScene().getWindow();
+        stage.close();
+
+    }
+    public static String getCale() {
+        return cale;
     }
 
-    public void LabelAction(MouseEvent event){
-        System.out.println("asdasd");
-
-    }
-    public void LabelAction2(MouseEvent event){
-        System.out.println("zafa");
-
+    public static void setCale(String cale) {
+        ControllerProd.cale = cale;
     }
 
-public void ButtonAction(ActionEvent event){
-
-
-    controllerProd=new ControllerProd();
-    if (nume_field.getText().isEmpty()) {
-        showAlert(Alert.AlertType.ERROR, anch.getScene().getWindow(), "Eroare la creare produs!", "Introduceti un nume!");
-        return;
-    }
-    if (pret_field.getText().isEmpty()) {
-        showAlert(Alert.AlertType.ERROR, anch.getScene().getWindow(), "Eroare la creare produs!", "Introduceti un pret!");
-        return;
-    }
-    if (descriere_field.getText().isEmpty()) {
-        showAlert(Alert.AlertType.ERROR, anch.getScene().getWindow(), "Eroare la creare produs!", "Introduceti o descriere!");
-        return;
-    }
-   Produs produs=new Produs(nume_field.getText(),Integer.parseInt(pret_field.getText()),descriere_field.getText(),"nvm", CommunicationClass.getUsername());
-   String path= SavePhotos.SavePhotos(produs,"Photos");
-    Image img=new Image(path);
-    ImageView imageView=new ImageView();
-    imageView.setImage(img);
-    imageView.setFitWidth(260);
-    imageView.setFitHeight(210);
-
-    imageView.setSmooth(true);
-    imageView.setCache(true);
-    flow.getChildren().add(imageView);
-
-        controllerProd.addProdus(produs);
-
-
-}
-
-    private void showAlert(Alert.AlertType alertType, Window owner, String title, String message) {
-        Alert alert = new Alert(alertType);
-        alert.setTitle(title);
-        alert.setHeaderText(null);
-        alert.setContentText(message);
-        alert.initOwner(owner);
-        alert.show();
-    }
-    public static void FromAtoO(){
+    protected Writer write;
+    protected static Produs p;
+    public void AdaugaPoza(MouseEvent event){
+        p=new Produs();
         try{
+            String path= SavePhotos.SavePhotos(p,"Poze_Produse");
+            ControllerProd.setCale(path);
+        }catch (Exception exception){
+            showAlert(Alert.AlertType.ERROR, anchfx.getScene().getWindow(), "Eroare la creare produs!", "Alegeti o poza!");
+        }
 
-            Reader reader= Files.newBufferedReader(Paths.get("Produse_db//produse.json"));
-            List<Produs> u = Arrays.asList(gson.fromJson(reader, Produs[].class));
-            produse.removeAll(produse);
-            produse.addAll(u);
-            reader.close();
 
+    }
 
-        }catch (Exception ex){
+    public void ButtonAction(ActionEvent event) throws NumberFormatException
+    {
+       ControllerMag.FromAtoO();
+        try {
+            ControllerProd.checkNameDoesNotAlreadyExist(numefx.getText());
+        }catch (NameOfProducAlreadyExistsException e){
+            AlertBox.showAlert(Alert.AlertType.ERROR, anchfx.getScene().getWindow(), "Eroare la creare produs!", "Numele produsului exista deja!");
             return;
         }
-
-    }
-
-
-    public void addProdus(Produs u) {
-        ControllerProd.FromAtoO();
-        MakeaDir.makeaDir("Produse_db");
-        try {
-            write = Files.newBufferedWriter(Paths.get("Produse_db//produse.json"));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        produse.add(u);
+        String path= ControllerProd.getCale();
+        if(numefx.getText().isEmpty()){
+            AlertBox.showAlert(Alert.AlertType.ERROR, anchfx.getScene().getWindow(), "Eroare la creare produs!", "Introduceti un nume!");
+            return;}
+        if(pretfx.getText().isEmpty()){
+            AlertBox.showAlert(Alert.AlertType.ERROR, anchfx.getScene().getWindow(), "Eroare la creare produs!", "Introduceti un pret!");
+            return;}
+        if(descrierefx.getText().isEmpty()){
+            AlertBox.showAlert(Alert.AlertType.ERROR, anchfx.getScene().getWindow(), "Eroare la creare produs!", "Introduceti o descriere!");
+            return;}
+        ControllerMag.FromAtoO();
         try{
-            gson.toJson(produse,write);
-            write.close();
+        p =new Produs(numefx.getText(),Double.parseDouble(pretfx.getText()),descrierefx.getText(),path);}catch (NumberFormatException e){
+            AlertBox.showAlert(Alert.AlertType.ERROR, anchfx.getScene().getWindow(), "Eroare la creare produs!", "Pretul trebuie sa fie un numar!");
+            return;
+        }
+        String name=categoriefx.getText();
+       // String path= SavePhotos.SavePhotos(produs,"Poze_Produse");
+      //  javafx.scene.image.Image img=new Image(path);
+        //ImageView imageView=new ImageView();
+      //  imageView.setImage(img);
+      //  imageView.setFitWidth(260);
+     //   imageView.setFitHeight(210);
+     //   imageView.setSmooth(true);
+     //   imageView.setCache(true);
+     //   flow.getChildren().add(imageView);
+        boolean adaugat=false;
+        for(Magazin m:magazine){
+            if(m.getId().equals(CommunicationClass.getUsername()))
+                for(Categorie c:m.getCategori())
+                    if(c.getNume().equals(name)){
+                        c.getProduse().add(p);
+                        adaugat=true;
+                    }
+                }
+
+
+
+        if(adaugat==false){
+            AlertBox.showAlert(Alert.AlertType.ERROR, anchfx.getScene().getWindow(), "Eroare la creare produs!", "Nu s-a putut face adaugarea!");
+            return;
+        }
+        if (path==null){
+            showAlert(Alert.AlertType.ERROR, anchfx.getScene().getWindow(), "Eroare la creare categorie!", "Introduceti o poza!");
+            return;
+        }
+        try {
+            write = Files.newBufferedWriter(Paths.get("Magazine_db//magazine.json"));
         } catch (IOException e) {
             e.printStackTrace();
-        }
+        } try{
+        gson.toJson(magazine,write);
+        write.close();
+    } catch (IOException e) {
+        e.printStackTrace();
     }
+        Stage stage = (Stage) salveazafx.getScene().getWindow();
+        stage.close();
+
+    }
+
 }
