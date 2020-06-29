@@ -1,5 +1,7 @@
 package AbstractClasses;
 
+import Models.Categorie;
+import Models.Magazin;
 import Models.Produs;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.scene.image.Image;
@@ -11,14 +13,14 @@ import java.io.File;
 import java.io.IOException;
 
 public abstract class SavePhotos  {
-    public static String SavePhotos(Object a,String nume_director){
+    public static String SavePhotos(Object a,String nume_director) throws Exception{
         FileChooser fc=new FileChooser();
         String path = new String();
         fc.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("JPG files","*.jpg"),
                 new FileChooser.ExtensionFilter("PNG files","*.png"));
 
         File selectedFile=fc.showOpenDialog(null);
-        try{
+
             Image img=new Image(selectedFile.toURI().toURL().toString());
 
 
@@ -29,15 +31,22 @@ public abstract class SavePhotos  {
                 String extension = name.substring(1 + name.lastIndexOf(".")).toLowerCase();
                 BufferedImage bufferedImage = SwingFXUtils.fromFXImage(img, null);
                 if(a instanceof Produs) {
-                    ((Produs) a).setPath("file:Photos/" + name );
-                path="file:Photos/"+name;
+                    ((Produs) a).setPath("file:Poze_Produse/" + name );
+                path="file:Poze_Produse/"+name;
                 }
+                else if(a instanceof Magazin){
+                    ((Magazin) a).setMag_pic_path("file:Poze_Magazine/" + name);
+                    path="file:Poze_Magazine/"+name;
+                }
+                else if(a instanceof Categorie){
+                    ((Categorie) a).setPic_path("file:Poze_Categori/" + name);
+                    path="file:Poze_Categori/"+name;
+                }
+
                 ImageIO.write(bufferedImage, extension, new File(nume_director+"//"+name/*+"."+extension*/));
 
             }
-       }catch (IOException e){
-            e.printStackTrace();
-        }
+
         return path;
     }
 }

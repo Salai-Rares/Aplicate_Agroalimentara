@@ -1,11 +1,15 @@
 package Models;
 
-public class Produs {
+import Controllers.ProdMain;
+
+import java.util.Comparator;
+
+public class Produs  {
     private String nume;
     private double pret;
     private String picture_path;
     private String descriere;
-    private String id;
+
 
     public String getNume() {
         return nume;
@@ -38,22 +42,26 @@ public class Produs {
     public void setDescriere(String descriere) {
         this.descriere = descriere;
     }
+    public static Comparator<Produs> ProNameComparator = new Comparator<Produs>(){
+        @Override
+        public int compare(Produs o1, Produs o2) {
+            String ProdusName1 = o1.getNume().toUpperCase();
+            String ProdusName2 = o2.getNume().toUpperCase();
+
+  return ProdusName1.compareTo(ProdusName2);
+
+    }};
 
 
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
-    }
-
-    public Produs(String nume, double pret, String descriere, String path, String id) {
+    public Produs(String nume, double pret, String descriere, String path) {
         this.nume = nume;
         this.pret = pret;
         this.descriere = descriere;
         this.picture_path=path;
-        this.id=id;
+    }
+    public Produs(){
 
     }
+
+
 }

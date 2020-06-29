@@ -1,7 +1,6 @@
 package GUI;
 
-import Controllers.ControllerProd;
-import Controllers.ProdMain;
+import Controllers.*;
 import Exceptions.UsernameOrPasswordWrongException;
 import JSON.CommunicationClass;
 import JSON.UserSer;
@@ -16,12 +15,14 @@ import javafx.scene.control.*;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Priority;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import javafx.stage.Window;
 
 import javax.swing.*;
@@ -32,10 +33,10 @@ import java.util.Objects;
 public class LoginUser extends Application {
 
 private UserSer userSer;
-private ProdMain prodMain;
+private HomePageMagazinMain homePageMagazinMain;
 private Stage primaryStage =new Stage();
 private String username;
-
+private int contor=0;
     public String getUsername() {
         return username;
     }
@@ -48,6 +49,8 @@ private String username;
     @Override
     public void start(Stage primaryStage) throws Exception {
         this.primaryStage=primaryStage;
+        if(CommunicationClass.getLogreg()==0)
+        primaryStage.initStyle(StageStyle.TRANSPARENT);
         primaryStage.setTitle("Login Aplicatie Agroalimentara");
 
         // Create the registration form grid pane
@@ -123,6 +126,20 @@ private String username;
         passwordField.setPrefHeight(40);
         gridPane.add(passwordField, 1, 3);
 
+
+        Hyperlink register = new Hyperlink("If you dont have an account yet register here!");
+        gridPane.add(register,0,5,2,1);
+        GridPane.setHalignment(register,HPos.CENTER);
+        register.setOnAction(e -> {
+            Registration registration=new Registration();
+            try{
+                CommunicationClass.setLogreg(1);
+            registration.start(primaryStage);}catch (Exception exception){
+                exception.printStackTrace();
+            }
+        });
+
+
         // Add Submit Button
         Button submitButton = new Button("Login");
         submitButton.setPrefHeight(40);
@@ -148,10 +165,12 @@ private String username;
             try {
               String rol=userSer.checkCredentials(usernameField.getText(),passwordField.getText());
                 primaryStage.close();
-                prodMain=new ProdMain();
+                homePageMagazinMain=new HomePageMagazinMain();
                if(Objects.equals(rol,"Magazin")){
                    CommunicationClass.setUsername(usernameField.getText());
-                prodMain.start(primaryStage);}
+
+                homePageMagazinMain.start(primaryStage);
+               }
             }catch (UsernameOrPasswordWrongException ex){
                 showAlert(Alert.AlertType.ERROR, gridPane.getScene().getWindow(), "Login Error!", "Username or password wrong!");
                 return;
@@ -159,7 +178,7 @@ private String username;
                 e.printStackTrace();
             }
 
-            showAlert(Alert.AlertType.CONFIRMATION, gridPane.getScene().getWindow(), "Logged in succesfully!", "Welcome " + usernameField.getText());
+
 
         });
     }
