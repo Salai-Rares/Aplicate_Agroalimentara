@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane fx:id="anchfx" prefHeight="632.0" prefWidth="1092.0" style="-fx-background-color: #030307; -fx-background-radius: 30;" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.ControllerAfisareProduse">
+    <children>
+        <AnchorPane layoutX="-1.0" prefHeight="89.0" prefWidth="1092.0" style="-fx-background-color: #011a3d; -fx-background-radius: 30;">
+            <effect>
+                <Bloom>
+                    <input>
+                        <ColorAdjust />
+                    </input>
+                </Bloom>
+            </effect>
+            <children>
+                <Button fx:id="inchidefx" layoutX="1004.0" layoutY="20.0" mnemonicParsing="false" onMouseClicked="#inchide_fereastra" prefHeight="46.0" prefWidth="53.0" styleClass="button2" stylesheets="@dark_theme.css">
+                    <graphic>
+                        <ImageView fitHeight="40.0" fitWidth="41.0" pickOnBounds="true" preserveRatio="true">
+                            <image>
+                                <Image url="@sign_out.png" />
+                            </image>
+                        </ImageView>
+                    </graphic>
+                </Button>
+            </children>
+        </AnchorPane>
+        <VBox layoutX="-1.0" layoutY="71.0" prefHeight="561.0" prefWidth="112.0" style="-fx-background-color: #011a3d; -fx-background-radius: 30;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="-1.0" AnchorPane.topAnchor="71.0">
+            <effect>
+                <DropShadow />
+            </effect>
+            <children>
+                <Button fx:id="sortarefx" mnemonicParsing="false" onAction="#AfisareSortat" prefHeight="87.0" prefWidth="113.0" styleClass="button4" stylesheets="@dark_theme.css" text="Sortare" textFill="#f2eeee">
+                    <VBox.margin>
+                        <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
+                    </VBox.margin>
+                    <padding>
+                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                    </padding>
+                </Button>
+                <Button mnemonicParsing="false" onMouseClicked="#Stergere" prefHeight="85.0" prefWidth="108.0" styleClass="button4" stylesheets="@dark_theme.css" text="Sterge" textFill="#e8e6e6">
+                    <VBox.margin>
+                        <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
+                    </VBox.margin>
+                    <padding>
+                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                    </padding>
+                </Button>
+            </children>
+        </VBox>
+        <AnchorPane layoutX="143.0" layoutY="99.0" prefHeight="513.0" prefWidth="924.0" style="-fx-background-color: #1b1732; -fx-background-radius: 15;">
+            <children>
+                <Label layoutX="269.0" layoutY="14.0" prefHeight="65.0" prefWidth="387.0" text="Lista cu produsele tale" textAlignment="RIGHT" textFill="#9178c3c7">
+                    <font>
+                        <Font name="Times New Roman" size="33.0" />
+                    </font></Label>
+                <Line endX="290.9309387207031" endY="-10.907812118530273" layoutX="259.0" layoutY="298.0" rotate="91.5" startX="-147.4000244140625" stroke="#cfc2c2" />
+                <ScrollPane fx:id="scroll" layoutX="335.0" layoutY="73.0" prefHeight="440.0" prefWidth="584.0" stylesheets="@dark_theme.css" />
+                <ImageView fitHeight="65.0" fitWidth="54.0" layoutX="265.0" layoutY="433.0" pickOnBounds="true" preserveRatio="true">
+                    <image>
+                        <Image url="@resources/wheat.png" />
+                    </image>
+                </ImageView>
+                <BorderPane layoutX="14.0" layoutY="74.0" prefHeight="307.0" prefWidth="315.0">
+                    <top>
+                        <Label prefHeight="220.0" prefWidth="294.0" text="Bine ai venit in meniul de viuzalizare produse!" textFill="#c9bdbd" wrapText="true" BorderPane.alignment="CENTER">
+                            <font>
+                                <Font size="25.0" />
+                            </font>
+                        </Label>
+                    </top>
+                </BorderPane>
+            </children>
+        </AnchorPane>
+    </children>
+</AnchorPane>
