@@ -111,6 +111,14 @@ public class ControllerAfisareCategorie implements Initializable {
                     }
                   }}
     }
+    public void vizionareComenzi(MouseEvent event){
+        Stage stage=new Stage();
+        TableMain tableMain=new TableMain();
+        try{
+        tableMain.start(stage);}catch (Exception exception){
+            exception.printStackTrace();
+        }
+    }
     private void stergeMagazin(){
         for(Magazin magazin: magazine){
             if (magazin.getId().equals(CommunicationClass.getUsername()) && magazin.getNume().equals(CommunicationClass.getMagazin())){
