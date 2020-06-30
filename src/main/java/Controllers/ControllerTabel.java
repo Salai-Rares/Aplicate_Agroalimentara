@@ -32,6 +32,7 @@ public class ControllerTabel implements Initializable {
                 comandas.add(infoComanda);
             return comandas;
     }
+
     private void Afisare(){
         scroll.setHbarPolicy(ScrollPane.ScrollBarPolicy.AS_NEEDED);
         scroll.setVbarPolicy(ScrollPane.ScrollBarPolicy.AS_NEEDED);
