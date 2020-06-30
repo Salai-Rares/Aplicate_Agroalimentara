@@ -63,7 +63,7 @@ public class ControllerHomePageCustomer implements Initializable {
                 Hyperlink hyperlink=new Hyperlink(m.getNume());
 
                 Stage scene=new Stage();
-                CatAfisMain catAfisMain=new CatAfisMain();
+                CustCatAfisMain catAfisMain=new CustCatAfisMain();
                 hyperlink.setOnAction(e-> {
                     try {
                         CommunicationClass.setMagazin(hyperlink.getText());
