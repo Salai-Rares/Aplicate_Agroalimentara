@@ -95,10 +95,7 @@ public class ControllerHomePageMagazin implements Initializable {
             });
             btnar.add(hyperlink);}
         }
-     /*   for (int i = 0; i < magazine.size(); i++) {
-            Button downloadbtn=new Button("Download");
-            btnar.add(downloadbtn);
-        }*/
+
         gridpane.setAlignment(Pos.CENTER);
         gridpane.setPadding(new Insets(50, 50, 50, 50));
         gridpane.setHgap(50);
