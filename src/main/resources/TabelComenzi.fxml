@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane fx:id="anchfx" prefHeight="632.0" prefWidth="1092.0" style="-fx-background-color: #030307; -fx-background-radius: 30;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.ControllerTabel">
+    <children>
+        <AnchorPane layoutX="-1.0" prefHeight="89.0" prefWidth="1092.0" style="-fx-background-color: #011a3d; -fx-background-radius: 30;">
+            <effect>
+                <Bloom>
+                    <input>
+                        <ColorAdjust />
+                    </input>
+                </Bloom>
+            </effect>
+            <children>
+                <Button fx:id="inchidefx" layoutX="1004.0" layoutY="20.0" mnemonicParsing="false" onMouseClicked="#inchide_fereastra" prefHeight="46.0" prefWidth="53.0" styleClass="button2" stylesheets="@dark_theme.css">
+                    <graphic>
+                        <ImageView fitHeight="40.0" fitWidth="41.0" pickOnBounds="true" preserveRatio="true">
+                            <image>
+                                <Image url="@sign_out.png" />
+                            </image>
+                        </ImageView>
+                    </graphic>
+                </Button>
+            </children>
+        </AnchorPane>
+        <VBox layoutX="-1.0" layoutY="71.0" prefHeight="561.0" prefWidth="103.0" style="-fx-background-color: #011a3d; -fx-background-radius: 30;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="-1.0" AnchorPane.topAnchor="71.0">
+            <effect>
+                <DropShadow />
+            </effect>
+         <padding>
+            <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+         </padding>
+        </VBox>
+        <AnchorPane layoutX="125.0" layoutY="99.0" prefHeight="513.0" prefWidth="945.0" style="-fx-background-color: #1b1732; -fx-background-radius: 15;">
+            <children>
+                <Label layoutX="269.0" prefHeight="65.0" prefWidth="387.0" text="Categoriile tale de produse" textAlignment="RIGHT" textFill="#9178c3c7">
+                    <font>
+                        <Font name="Times New Roman" size="33.0" />
+                    </font></Label>
+                <ScrollPane fx:id="scroll" layoutX="38.0" layoutY="59.0" prefHeight="424.0" prefWidth="862.0" stylesheets="@dark_theme.css" />
+                <ImageView fitHeight="50.0" fitWidth="47.0" layoutX="900.0" layoutY="460.0" pickOnBounds="true" preserveRatio="true">
+                    <image>
+                        <Image url="@resources/wheat.png" />
+                    </image>
+                </ImageView>
+            </children>
+        </AnchorPane>
+    </children>
+</AnchorPane>

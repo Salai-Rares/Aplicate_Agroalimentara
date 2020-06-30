@@ -44,32 +44,19 @@ public class ControllerCat {
     private Button salveazafx;
     @FXML
     private Button inchidefx;
-    private static String cale;
-/*
-    @FXML
-    private javafx.scene.control.Button adaugac;
-    @FXML
-    private javafx.scene.control.TextField numec;
-    @FXML
-    private javafx.scene.control.Button submitc;
-    @FXML
-    private AnchorPane anchm;
-    @FXML
-    private TextField magazin;
-    @FXML
-    private FlowPane flow;*/
+
+
     private Categorie categorie;
-    public static void setCale(String cale) {
-        ControllerCat.cale = cale;
-    }
+
 
     public void AdaugaPoza(MouseEvent event){
         categorie=new Categorie();
         try{
             String path=SavePhotos.SavePhotos(categorie,"Poze_Categori");
-            ControllerCat.setCale(path);
+            CommunicationClass.setCat_Path(path);
         }catch (Exception exception){
             showAlert(Alert.AlertType.ERROR, anchfx.getScene().getWindow(), "Eroare la creare Categorie!", "Alegeti o poza!");
+            return;
         }
 
 
@@ -105,22 +92,15 @@ public class ControllerCat {
           AlertBox.showAlert(Alert.AlertType.ERROR, anchfx.getScene().getWindow(), "Eroare la creare categorie!", "Numele categoriei exista deja!");
           return;
       }
-      String path= ControllerCat.getCale();
+      String path= CommunicationClass.getCat_Path();
       if (path==null){
           showAlert(Alert.AlertType.ERROR, anchfx.getScene().getWindow(), "Eroare la creare categorie!", "Introduceti o poza!");
           return;
       }
+
+
       Categorie categorie=new Categorie(path,null,numefx.getText());
       String name=magazinfx.getText();
-      //String path= SavePhotos.SavePhotos(categorie,"Poze_Categori");
-      //javafx.scene.image.Image img=new Image(path);
-     // ImageView imageView=new ImageView();
-     // imageView.setImage(img);
-     // imageView.setFitWidth(260);
-     // imageView.setFitHeight(210);
-     // imageView.setSmooth(true);
-    //  imageView.setCache(true);
-    //  flow.getChildren().add(imageView);
       boolean adaugat=false;
       for(Magazin m:magazine)
           if (m.getNume().equals(name) && m.getId().equals(CommunicationClass.getUsername())) {
@@ -146,9 +126,7 @@ public class ControllerCat {
       stage.close();}
   }
 
-    private static String getCale() {
-        return ControllerCat.cale;
-    }
+
 
 
 }

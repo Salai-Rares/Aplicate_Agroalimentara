@@ -1,13 +1,11 @@
 package Controllers;
 
 import JSON.CommunicationClass;
-import Models.Categorie;
 import Models.Magazin;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Hyperlink;
 import javafx.scene.control.ScrollPane;
@@ -27,42 +25,21 @@ import java.util.List;
 import java.util.ResourceBundle;
 
 import static Controllers.ControllerMag.magazine;
-public class ControllerHomePageMagazin implements Initializable {
+
+public class ControllerHomePageCustomer implements Initializable {
 
     @FXML
     private Button inchidefx;
     @FXML
     private ScrollPane scroll;
-    public void CreazaMagazin (MouseEvent event){
-        Stage primaryStage=new Stage();
-        MagMain magMain=new MagMain();
-        try{
-            magMain.start(primaryStage);}catch (Exception e){
-            e.printStackTrace();
-        }
-
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+        ControllerMag.FromAtoO();
+        this.loadPhotos();
     }
-    public void CreazaCategorie (MouseEvent event){
-        Stage primaryStage=new Stage();
-        CatMain catMain=new CatMain();
-        try{
-            catMain.start(primaryStage);}catch (Exception e){
-            e.printStackTrace();
-        }
-
-    }
-    public void CreazaProdus (MouseEvent event){
-        Stage primaryStage=new Stage();
-        ProdMain prodMain=new ProdMain();
-        try{
-            prodMain.start(primaryStage);}catch (Exception e){
-            e.printStackTrace();
-        }
-
-    }
-    public void inchide_fereastra(MouseEvent event){
-        Stage stage = (Stage) inchidefx.getScene().getWindow();
-        stage.close();
+    public void AfisareSortare(){
+        this.sortare();
+        this.loadPhotos();
     }
     private  List<Magazin> sortare(){
 
@@ -70,30 +47,33 @@ public class ControllerHomePageMagazin implements Initializable {
         return magazine;
 
     }
+    public void inchide_fereastra(MouseEvent event){
+        Stage stage = (Stage) inchidefx.getScene().getWindow();
+        stage.close();
+    }
     public void loadPhotos(){
 
         GridPane gridpane = new GridPane();
         scroll.setHbarPolicy(ScrollPane.ScrollBarPolicy.AS_NEEDED);
         scroll.setVbarPolicy(ScrollPane.ScrollBarPolicy.AS_NEEDED);
-      //  scroll.setPrefSize(390, 390);
         scroll.setContent(gridpane);
         List btnar=new ArrayList<>();
         for(Magazin m : magazine){
-            if(m.getId().equals(CommunicationClass.getUsername())){
-            Hyperlink hyperlink=new Hyperlink(m.getNume());
 
-               Stage scene=new Stage();
-            CatAfisMain catAfisMain=new CatAfisMain();
-            hyperlink.setOnAction(e-> {
-                try {
-                    CommunicationClass.setMagazin(hyperlink.getText());
-                    hyperlink.setVisited(false);
-                    catAfisMain.start(scene);
-                } catch (Exception exception) {
-                    exception.printStackTrace();
-                }
-            });
-            btnar.add(hyperlink);}
+                Hyperlink hyperlink=new Hyperlink(m.getNume());
+
+                Stage scene=new Stage();
+                CustCatAfisMain catAfisMain=new CustCatAfisMain();
+                hyperlink.setOnAction(e-> {
+                    try {
+                        CommunicationClass.setMagazin(hyperlink.getText());
+                        hyperlink.setVisited(false);
+                        catAfisMain.start(scene);
+                    } catch (Exception exception) {
+                        exception.printStackTrace();
+                    }
+                });
+                btnar.add(hyperlink);
         }
 
         gridpane.setAlignment(Pos.CENTER);
@@ -110,7 +90,7 @@ public class ControllerHomePageMagazin implements Initializable {
         for (int i = 0; i < magazine.size(); i++) {
 
             //   System.out.println(magazine.get(i).getName());
-            if(magazine.get(i).getId().equals(CommunicationClass.getUsername())) {
+
                 contor++;
                 Image image = new Image(magazine.get(i).getMag_pic_path());
                 ImageView pic = new ImageView();
@@ -135,16 +115,8 @@ public class ControllerHomePageMagazin implements Initializable {
 
                 }
             }
-        }
-    }
-    public void AfisareSortare(){
-        this.sortare();
-        this.loadPhotos();
+
+         }
     }
 
 
-    @Override
-    public void initialize(URL location, ResourceBundle resources) {
-        ControllerMag.FromAtoO();
-    }
-}

@@ -171,6 +171,10 @@ private int contor=0;
 
                 homePageMagazinMain.start(primaryStage);
                }
+               else if(Objects.equals(rol,"Cumparator")){
+                   HomePageCumparatorMain homePageCumparatorMain=new HomePageCumparatorMain();
+                   homePageCumparatorMain.start(primaryStage);
+               }
             }catch (UsernameOrPasswordWrongException ex){
                 showAlert(Alert.AlertType.ERROR, gridPane.getScene().getWindow(), "Login Error!", "Username or password wrong!");
                 return;

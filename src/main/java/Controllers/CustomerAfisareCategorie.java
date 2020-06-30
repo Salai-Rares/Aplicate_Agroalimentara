@@ -1,16 +1,13 @@
 package Controllers;
 
-import AbstractClasses.AlertBox;
 import JSON.CommunicationClass;
 import Models.Categorie;
 import Models.Magazin;
-import Models.Produs;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
-import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Hyperlink;
 import javafx.scene.control.ScrollPane;
@@ -20,17 +17,15 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
 import javafx.stage.Stage;
 
-import java.io.IOException;
-import java.io.Writer;
 import java.net.URL;
-import java.nio.file.Files;
-import java.nio.file.Paths;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.ResourceBundle;
 
-import static Controllers.ControllerMag.gson;
 import static Controllers.ControllerMag.magazine;
 
-public class ControllerAfisareCategorie implements Initializable {
+public class CustomerAfisareCategorie implements Initializable {
     @FXML
     private Button inchidefx;
     @FXML
@@ -42,14 +37,25 @@ public class ControllerAfisareCategorie implements Initializable {
         Stage stage = (Stage) inchidefx.getScene().getWindow();
         stage.close();
     }
+    private  List<Magazin> sortare(){
 
+        for(Magazin magazin:magazine)
+            if ( magazin.getNume().equals(CommunicationClass.getMagazin()))
+                Collections.sort(magazin.getCategori(), Categorie.CatNameComparator);
+        return magazine;
+
+    }
+    public void AfisareSortat(ActionEvent event){
+
+        this.afisareCategorii(this.sortare());
+    }
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         ControllerMag.FromAtoO();
         this.afisareCategorii(magazine);
     }
-    private void afisareCategorii(List <Magazin> ref){
+    private void afisareCategorii(List<Magazin> ref){
 
 
         int contor=0;
@@ -70,11 +76,11 @@ public class ControllerAfisareCategorie implements Initializable {
         scroll.setContent(gridpane);
         List btnar=new ArrayList<>();
         Stage scene = new Stage();
-        ProdAfisMain prodAfisMain = new ProdAfisMain();
+        CustProdAfisMain custProdAfisMain = new CustProdAfisMain();
         for(Magazin magazin:ref)
-            if (magazin.getId().equals(CommunicationClass.getUsername()) && magazin.getNume().equals(CommunicationClass.getMagazin())){
+            if ( magazin.getNume().equals(CommunicationClass.getMagazin())){
 
-           //     size=magazin.getCategori().size();
+                //     size=magazin.getCategori().size();
                 for (Categorie categorie : magazin.getCategori()) {
                     Hyperlink hyperlink = new Hyperlink(categorie.getNume());
 
@@ -82,7 +88,7 @@ public class ControllerAfisareCategorie implements Initializable {
                         try {
                             CommunicationClass.setCategorie(hyperlink.getText());
                             hyperlink.setVisited(false);
-                            prodAfisMain.start(scene);
+                            custProdAfisMain.start(scene);
                         } catch (Exception exception) {
                             exception.printStackTrace();
                         }
@@ -109,57 +115,7 @@ public class ControllerAfisareCategorie implements Initializable {
                         imageRow++;
 
                     }
-                  }}
-    }
-    public void vizionareComenzi(MouseEvent event){
-        Stage stage=new Stage();
-        TableMain tableMain=new TableMain();
-        try{
-        tableMain.start(stage);}catch (Exception exception){
-            exception.printStackTrace();
-        }
-    }
-    private void stergeMagazin(){
-        for(Magazin magazin: magazine){
-            if (magazin.getId().equals(CommunicationClass.getUsername()) && magazin.getNume().equals(CommunicationClass.getMagazin())){
-                magazine.remove(magazin);
-                try {
-                    Writer write = Files.newBufferedWriter(Paths.get("Magazine_db//magazine.json"));
-                    gson.toJson(magazine,write);
-                    write.close();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
-
-        }
-    }
-    private  List<Magazin> sortare(){
-
-        for(Magazin magazin:magazine)
-            if (magazin.getId().equals(CommunicationClass.getUsername()) && magazin.getNume().equals(CommunicationClass.getMagazin()))
-                Collections.sort(magazin.getCategori(), Categorie.CatNameComparator);
-            return magazine;
-
-    }
-    public void AfisareSortat(ActionEvent event){
-
-        this.afisareCategorii(this.sortare());
-    }
-    public void Stergere(MouseEvent event) throws InterruptedException {
-        if( AlertBox.showCofirmation("Stergere Magazin","Doriti sa stergeti acest magazin?")) {
-            Thread.sleep(1000);
-            AlertBox.showAlert(Alert.AlertType.CONFIRMATION,anchfx.getScene().getWindow(),"Stergere Magazin","Stergerea a avut succes!");
-
-            try{
-                this.stergeMagazin();
-            } catch (ConcurrentModificationException exception){
-
-                return;
-            }
-
-        }
-
+                }}
     }
 
 }

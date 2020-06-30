@@ -9,7 +9,7 @@
 <?import javafx.scene.shape.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane fx:id="anchfx" prefHeight="632.0" prefWidth="1092.0" style="-fx-background-color: #030307; -fx-background-radius: 30;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.ControllerAfisareCategorie">
+<AnchorPane fx:id="anchfx" prefHeight="632.0" prefWidth="1092.0" style="-fx-background-color: #030307; -fx-background-radius: 30;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.CustomerAfisareCategorie">
     <children>
         <AnchorPane layoutX="-1.0" prefHeight="89.0" prefWidth="1092.0" style="-fx-background-color: #011a3d; -fx-background-radius: 30;">
             <effect>
@@ -44,27 +44,11 @@
                         <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                     </padding>
                 </Button>
-                <Button layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onMouseClicked="#Stergere" prefHeight="88.0" prefWidth="114.0" styleClass="button4" stylesheets="@dark_theme.css" text="Stergere" textFill="#f2eded">
-                    <VBox.margin>
-                        <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
-                    </VBox.margin>
-                    <padding>
-                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                    </padding>
-                </Button>
-            <Button layoutX="12.0" layoutY="104.0" mnemonicParsing="false" onMouseClicked="#vizionareComenzi" prefHeight="88.0" prefWidth="114.0" styleClass="button4" stylesheets="@dark_theme.css" text="Comenzi" textFill="#f2eded">
-               <padding>
-                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-               </padding>
-               <VBox.margin>
-                  <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
-               </VBox.margin>
-            </Button>
             </children>
         </VBox>
         <AnchorPane layoutX="143.0" layoutY="99.0" prefHeight="513.0" prefWidth="924.0" style="-fx-background-color: #1b1732; -fx-background-radius: 15;">
             <children>
-                <Label layoutX="269.0" layoutY="14.0" prefHeight="65.0" prefWidth="387.0" text="Categoriile tale de produse" textAlignment="RIGHT" textFill="#9178c3c7">
+                <Label layoutX="269.0" layoutY="14.0" prefHeight="65.0" prefWidth="387.0" text="Categoriile magazinului ales" textAlignment="RIGHT" textFill="#9178c3c7">
                     <font>
                         <Font name="Times New Roman" size="33.0" />
                     </font></Label>

@@ -39,22 +39,7 @@ public class ControllerMag {
     protected static Gson gson=new GsonBuilder().setPrettyPrinting().create();
     protected static List<Magazin> magazine=new ArrayList<>();
     protected Writer write;
-  /*  @FXML
-    private Button poza;
-    @FXML
-    private Button creaza;
-    @FXML
-    private Button adaugam;
-    @FXML
-    private AnchorPane anchm;
-    @FXML
-    private TextField fieldm;
-    @FXML
-    private FlowPane flow;
-    @FXML
-    private Button load;
-    @FXML
-    private ScrollPane scroll;*/
+
     @FXML
     private AnchorPane anchfx;
     @FXML
@@ -80,63 +65,6 @@ public class ControllerMag {
         ControllerMag.cale = cale;
     }
 
-    //private ControllerMag controllerMag;
-//Pentru HomePage
-
-   /* public void loadPhotos(){
-        ControllerMag.FromAtoO();
-        GridPane gridpane = new GridPane();
-        scroll.setHbarPolicy(ScrollPane.ScrollBarPolicy.AS_NEEDED);
-        scroll.setVbarPolicy(ScrollPane.ScrollBarPolicy.AS_NEEDED);
-        scroll.setPrefSize(390, 390);
-        scroll.setContent(gridpane);
-        List btnar=new ArrayList<>();
-        for (int i = 0; i < magazine.size(); i++) {
-            Button downloadbtn=new Button("Download");
-            btnar.add(downloadbtn);
-        }
-        gridpane.setAlignment(Pos.CENTER);
-        gridpane.setPadding(new Insets(50, 50, 50, 50));
-
-        gridpane.setHgap(50);
-        gridpane.setVgap(50);
-
-
-        ColumnConstraints columnConstraints = new ColumnConstraints();
-        columnConstraints.setFillWidth(true);
-        columnConstraints.setHgrow(Priority.ALWAYS);
-        gridpane.getColumnConstraints().add(columnConstraints);
-
-        int imageCol = 0;
-        int imageRow = 0;
-        for (int i = 0; i < magazine.size(); i++) {
-            //   System.out.println(magazine.get(i).getName());
-            Image image = new Image(magazine.get(i).getMag_pic_path());
-
-            ImageView pic = new ImageView();
-            pic.setFitWidth(130);
-            pic.setFitHeight(130);
-
-
-            pic.setImage(image);
-            VBox vb = new VBox();
-            vb.setAlignment(Pos.CENTER);
-            vb.getChildren().addAll(pic,(Button)btnar.get(i));
-            gridpane.add(vb, imageCol, imageRow);
-            GridPane.setMargin(pic, new Insets(2,2,2,2));
-            imageCol++;
-
-            // To check if all the 3 images of a row are completed
-            if (imageCol > 2) {
-                // Reset Column
-                imageCol = 0;
-                // Next Row
-                imageRow++;
-
-            }
-        }
-    }*/
-
 
     public void AdaugaPoza(MouseEvent event){
         magazin=new Magazin();
@@ -146,32 +74,8 @@ public class ControllerMag {
         }catch (Exception exception){
             showAlert(Alert.AlertType.ERROR, anchfx.getScene().getWindow(), "Eroare la creare magazin!", "Alegeti o poza!");
         }
-
-
     }
 
-    //Pentru HomePage
-    /*
-    public void ButtonCreaza (MouseEvent event){
-        Stage primaryStage=new Stage();
-        CatMain catMain=new CatMain();
-        try{
-        catMain.start(primaryStage);}catch (Exception e){
-            e.printStackTrace();
-        }
-
-    }
-    public void ButtonCreaza2 (MouseEvent event){
-        Stage primaryStage=new Stage();
-        ProdMain prodMain=new ProdMain();
-        try{
-            prodMain.start(primaryStage);}catch (Exception e){
-            e.printStackTrace();
-        }
-
-    }
-
-*/
 
     public void inchide_fereastra(MouseEvent event){
         Stage stage = (Stage) inchidefx.getScene().getWindow();
@@ -250,22 +154,6 @@ public class ControllerMag {
     }
 
 
-  /*  public void addMagazin(Magazin u) {
-        ControllerMag.FromAtoO();
-        MakeaDir.makeaDir("Magazine_db");
-       try {
-            write = Files.newBufferedWriter(Paths.get("Magazine_db//magazine.json"));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        magazine.add(u);
-        try{
-            gson.toJson(magazine,write);
-            write.close();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }*/
 
 }
 
