@@ -8,6 +8,24 @@ public class CommunicationClass {
     private static String nume_produs;
     private static double pret_produs;
     private static String path_produs;
+    private static String Cat_Path;
+    private static int cantitate;
+
+    public static int getCantitate() {
+        return cantitate;
+    }
+
+    public static void setCantitate(int cantitate) {
+        CommunicationClass.cantitate = cantitate;
+    }
+
+    public static String getCat_Path() {
+        return Cat_Path;
+    }
+
+    public static void setCat_Path(String cat_Path) {
+        Cat_Path = cat_Path;
+    }
 
     public static String getPath_produs() {
         return path_produs;
