@@ -76,7 +76,7 @@ public class CustomerAfisareCategorie implements Initializable {
         scroll.setContent(gridpane);
         List btnar=new ArrayList<>();
         Stage scene = new Stage();
-        ProdAfisMain prodAfisMain = new ProdAfisMain();
+        CustProdAfisMain custProdAfisMain = new CustProdAfisMain();
         for(Magazin magazin:ref)
             if ( magazin.getNume().equals(CommunicationClass.getMagazin())){
 
@@ -88,7 +88,7 @@ public class CustomerAfisareCategorie implements Initializable {
                         try {
                             CommunicationClass.setCategorie(hyperlink.getText());
                             hyperlink.setVisited(false);
-                            prodAfisMain.start(scene);
+                            custProdAfisMain.start(scene);
                         } catch (Exception exception) {
                             exception.printStackTrace();
                         }
