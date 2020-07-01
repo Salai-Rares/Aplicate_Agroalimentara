@@ -138,8 +138,7 @@ private int contor=0;
                 exception.printStackTrace();
             }
         });
-
-
+       
         // Add Submit Button
         Button submitButton = new Button("Login");
         submitButton.setPrefHeight(40);
@@ -151,7 +150,7 @@ private int contor=0;
 
 
         submitButton.setOnAction(event -> {
-
+            System.out.println("rares");
     userSer=new UserSer();
             if (usernameField.getText().isEmpty()) {
                 showAlert(Alert.AlertType.ERROR, gridPane.getScene().getWindow(), "Login Error!", "Please enter your username");
