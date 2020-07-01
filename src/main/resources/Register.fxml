@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane fx:id="anchfx" prefHeight="702.0" prefWidth="974.0" style="-fx-background-color: #030307; -fx-background-radius: 30;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.ControllerRegister">
+    <children>
+        <AnchorPane layoutX="10.0" layoutY="27.0" prefHeight="668.0" prefWidth="957.0" style="-fx-background-color: #1b1732; -fx-background-radius: 30;">
+            <children>
+                <Label layoutX="346.0" layoutY="49.0" prefHeight="70.0" prefWidth="265.0" text="Inregistrare" textFill="#e1e142">
+                    <font>
+                        <Font size="48.0" />
+                    </font>
+                </Label>
+                <Label layoutX="86.0" layoutY="196.0" prefHeight="40.0" prefWidth="142.0" text="Utilizator:" textFill="#f5f4f4">
+                    <font>
+                        <Font size="26.0" />
+                    </font>
+                </Label>
+                <Label layoutX="86.0" layoutY="248.0" prefHeight="40.0" prefWidth="95.0" text="Parola:" textFill="#f5f4f4">
+                    <font>
+                        <Font size="26.0" />
+                    </font>
+                </Label>
+                <TextField fx:id="emailfx" layoutX="212.0" layoutY="142.0" prefHeight="31.0" prefWidth="665.0" stylesheets="@dark_theme.css" />
+                <ImageView fitHeight="72.0" fitWidth="76.0" layoutX="867.0" layoutY="571.0" pickOnBounds="true" preserveRatio="true">
+                    <image>
+                        <Image url="@wheat2.png" />
+                    </image>
+                </ImageView>
+                <Button fx:id="salveazafx" alignment="CENTER" contentDisplay="TOP" layoutX="408.0" layoutY="552.0" mnemonicParsing="false" onAction="#ButtonAction" prefHeight="72.0" prefWidth="142.0" styleClass="button4" stylesheets="@dark_theme.css" text="Inregistrare" textFill="#ebe9e9">
+                    <graphic>
+                        <ImageView fitHeight="23.0" fitWidth="28.0" pickOnBounds="true" preserveRatio="true">
+                            <image>
+                                <Image url="@submit.png" />
+                            </image>
+                        </ImageView>
+                    </graphic>
+                </Button>
+                <PasswordField fx:id="passfx" layoutX="212.0" layoutY="257.0" prefHeight="31.0" prefWidth="665.0" stylesheets="@dark_theme.css" />
+                <PasswordField fx:id="confirmfx" layoutX="212.0" layoutY="314.0" prefHeight="31.0" prefWidth="665.0" stylesheets="@dark_theme.css" />
+                <Label layoutX="86.0" layoutY="310.0" prefHeight="40.0" prefWidth="112.0" text="Confirma:" textFill="#f5f4f4">
+                    <font>
+                        <Font size="26.0" />
+                    </font>
+                </Label>
+                <Label layoutX="86.0" layoutY="138.0" prefHeight="40.0" prefWidth="103.0" text="Email-ID:" textFill="#f5f4f4">
+                    <font>
+                        <Font size="26.0" />
+                    </font>
+                </Label>
+                <Label layoutX="86.0" layoutY="365.0" prefHeight="40.0" prefWidth="112.0" text="Nume:" textFill="#f5f4f4">
+                    <font>
+                        <Font size="26.0" />
+                    </font>
+                </Label>
+                <Label layoutX="86.0" layoutY="427.0" prefHeight="40.0" prefWidth="112.0" text="Telefon:" textFill="#f5f4f4">
+                    <font>
+                        <Font size="26.0" />
+                    </font>
+                </Label>
+                <Label layoutX="86.0" layoutY="485.0" prefHeight="40.0" prefWidth="112.0" text="Rol:" textFill="#f5f4f4">
+                    <font>
+                        <Font size="26.0" />
+                    </font>
+                </Label>
+                <ChoiceBox fx:id="rolfx" layoutX="212.0" layoutY="494.0" prefHeight="31.0" prefWidth="148.0" styleClass="linear-grad" stylesheets="@dark_theme.css" />
+                <TextField fx:id="userfx" layoutX="212.0" layoutY="201.0" prefHeight="31.0" prefWidth="665.0" stylesheets="@dark_theme.css" />
+                <TextField fx:id="numefx" layoutX="212.0" layoutY="370.0" prefHeight="31.0" prefWidth="665.0" stylesheets="@dark_theme.css" />
+                <TextField fx:id="telefonfx" layoutX="212.0" layoutY="432.0" prefHeight="31.0" prefWidth="665.0" stylesheets="@dark_theme.css" />
+            </children>
+        </AnchorPane>
+        <AnchorPane prefHeight="61.0" prefWidth="967.0" style="-fx-background-color: #2e0544; -fx-background-radius: 30;">
+            <effect>
+                <DropShadow />
+            </effect>
+            <children>
+                <Button fx:id="inchidefx" layoutX="881.0" layoutY="4.0" mnemonicParsing="false" onMouseClicked="#inchide_fereastra" prefHeight="55.0" prefWidth="72.0" styleClass="button2" stylesheets="@dark_theme.css">
+                    <graphic>
+                        <ImageView fitHeight="36.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
+                            <image>
+                                <Image url="@sign_out.png" />
+                            </image>
+                        </ImageView>
+                    </graphic></Button>
+            </children></AnchorPane>
+    </children>
+</AnchorPane>
