@@ -123,6 +123,9 @@ public class ControllerProd implements Initializable {
         p =new Produs(numefx.getText(),Double.parseDouble(pretfx.getText()),descrierefx.getText(),path);}catch (NumberFormatException e){
             AlertBox.showAlert(Alert.AlertType.ERROR, anchfx.getScene().getWindow(), "Eroare la creare produs!", "Pretul trebuie sa fie un numar!");
             return;
+        }catch (IllegalArgumentException illegalArgumentException){
+            AlertBox.showAlert(Alert.AlertType.ERROR, anchfx.getScene().getWindow(), "Eroare la creare produs!", illegalArgumentException.getMessage());
+
         }
         String name=combofx.getSelectionModel().getSelectedItem().toString();
 

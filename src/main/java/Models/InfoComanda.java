@@ -2,6 +2,8 @@ package Models;
 
 import java.util.Objects;
 
+import static Exceptions.isPhoneException.isPhone;
+
 public class InfoComanda {
     private String nume;
     private String adresa;
@@ -18,12 +20,16 @@ public class InfoComanda {
         this.cantitate = cantitate;
     }
 
-    public InfoComanda(String nume, String adresa, String numar, String magazin, String produs, int cantitate) {
+    public InfoComanda(String nume, String adresa, String numar, String magazin, String produs, int cantitate)throws IllegalArgumentException {
         this.nume = nume;
         this.adresa = adresa;
+        if(!isPhone(numar))
+            throw new NumberFormatException("Numarul trebuie sa inceapa cu 0");
         this.numar = numar;
         this.magazin=magazin;
         this.produs=produs;
+        if(cantitate<0)
+            throw new IllegalArgumentException();
         this.cantitate=cantitate;
     }
 

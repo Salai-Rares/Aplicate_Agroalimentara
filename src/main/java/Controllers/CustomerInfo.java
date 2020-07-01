@@ -79,8 +79,13 @@ public class CustomerInfo implements Initializable {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        infoComanda=new InfoComanda(numefx.getText(),adresafx.getText(),telefonfx.getText(),CommunicationClass.getMagazin(),CommunicationClass.getNume_produs(),CommunicationClass.getCantitate());
-
+        try {
+            infoComanda = new InfoComanda(numefx.getText(), adresafx.getText(), telefonfx.getText(), CommunicationClass.getMagazin(), CommunicationClass.getNume_produs(), CommunicationClass.getCantitate());
+        }
+        catch (IllegalArgumentException illegalArgumentException){
+            showAlert(Alert.AlertType.ERROR, anchfx.getScene().getWindow(), "Eroare la comandare produs!", "Cantitatea trebuie sa fie pozitiva!");
+            return;
+        }
         comenzi.add(infoComanda);
         try{
             gson.toJson(comenzi,write);
@@ -102,8 +107,6 @@ public class CustomerInfo implements Initializable {
             comenzi.removeAll(comenzi);
             comenzi.addAll(u);
             reader.close();
-
-
         }catch (Exception ex){
             return;
         }
