@@ -9,8 +9,10 @@ import Models.Categorie;
 import Models.Magazin;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -22,17 +24,19 @@ import javafx.stage.Window;
 
 import java.io.IOException;
 import java.io.Writer;
+import java.net.URL;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import java.util.ResourceBundle;
 
 import static AbstractClasses.AlertBox.showAlert;
 import static Controllers.ControllerMag.gson;
 import static Controllers.ControllerMag.magazine;
 
-public class ControllerCat {
+public class ControllerCat implements Initializable {
     protected Writer write;
     @FXML
     private TextField numefx;
@@ -44,10 +48,17 @@ public class ControllerCat {
     private Button salveazafx;
     @FXML
     private Button inchidefx;
-
+    @FXML
+    private ComboBox combofx;
 
     private Categorie categorie;
+    public void setCombofx(){
+        for(Magazin m:magazine)
+            if (m.getId().equals(CommunicationClass.getUsername())){
+                combofx.getItems().add(m.getNume());
 
+            }
+    }
 
     public void AdaugaPoza(MouseEvent event){
         categorie=new Categorie();
@@ -80,10 +91,9 @@ public class ControllerCat {
       if(numefx.getText().isEmpty()){
           AlertBox.showAlert(Alert.AlertType.ERROR, anchfx.getScene().getWindow(), "Eroare la creare categorie!", "Introduceti un nume!");
       return;}
-      if(magazinfx.getText().isEmpty()){
+      if(combofx.getSelectionModel().getSelectedIndex()==-1){
           AlertBox.showAlert(Alert.AlertType.ERROR, anchfx.getScene().getWindow(), "Eroare la creare categorie!", "Introduceti un magazin!");
           return;}
-
 
       ControllerMag.FromAtoO();
       try {
@@ -100,7 +110,7 @@ public class ControllerCat {
 
 
       Categorie categorie=new Categorie(path,null,numefx.getText());
-      String name=magazinfx.getText();
+      String name=combofx.getSelectionModel().getSelectedItem().toString();
       boolean adaugat=false;
       for(Magazin m:magazine)
           if (m.getNume().equals(name) && m.getId().equals(CommunicationClass.getUsername())) {
@@ -127,6 +137,8 @@ public class ControllerCat {
   }
 
 
-
-
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+        this.setCombofx();
+    }
 }
