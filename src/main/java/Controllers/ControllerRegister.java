@@ -89,7 +89,13 @@ public class ControllerRegister implements Initializable {
             showAlert(Alert.AlertType.ERROR, anchfx.getScene().getWindow(), "Eroare la inregistrare!", "Parolele nu corespund!");
             return;
         }
-        user=new User(userfx.getText(), CryptWithMD5.cryptWithMD5(passfx.getText()),numefx.getText(),emailfx.getText(),telefonfx.getText(),rolfx.getSelectionModel().getSelectedItem().toString());
+        try {
+            user=new User(userfx.getText(), CryptWithMD5.cryptWithMD5(passfx.getText()),numefx.getText(),emailfx.getText(),telefonfx.getText(),rolfx.getSelectionModel().getSelectedItem().toString());
+
+        }catch (IllegalArgumentException e){
+            showAlert(Alert.AlertType.ERROR, anchfx.getScene().getWindow(), "Eroare la inregistrare!", e.getMessage());
+            return;
+        }
         userSer=new UserSer();
         try {
             userSer.addUsers(user);

@@ -122,7 +122,12 @@ public class ControllerMag {
             showAlert(Alert.AlertType.ERROR, anchfx.getScene().getWindow(), "Eroare la creare Magazin!", "Introduceti o poza!");
             return;
         }
-         magazin=new Magazin(path,null,numefx.getText(),CommunicationClass.getUsername(),adresafx.getText(),telefonfx.getText());
+        try{
+         magazin=new Magazin(path,null,numefx.getText(),CommunicationClass.getUsername(),adresafx.getText(),telefonfx.getText());}
+        catch (IllegalArgumentException illegalArgumentException) {
+            showAlert(Alert.AlertType.ERROR, anchfx.getScene().getWindow(), "Eroare la creare Magazin!", illegalArgumentException.getMessage());
+            return;
+        }
         //controllerMag.addMagazin(magazin);
         magazine.add(magazin);
         try{
