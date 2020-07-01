@@ -1,7 +1,9 @@
 package GUI;
 
+import Controllers.LoginMain;
+
 public class App {
     public static void main(String[] args) {
-        LoginUser.main(args);
+        LoginMain.main(args);
     }
 }
