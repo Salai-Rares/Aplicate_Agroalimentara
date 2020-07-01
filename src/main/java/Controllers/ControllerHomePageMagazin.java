@@ -71,7 +71,7 @@ public class ControllerHomePageMagazin implements Initializable {
         return magazine;
 
     }
-    private void loadPhotos(){
+    public void loadPhotos(){
 
         GridPane gridpane = new GridPane();
         scroll.setHbarPolicy(ScrollPane.ScrollBarPolicy.AS_NEEDED);

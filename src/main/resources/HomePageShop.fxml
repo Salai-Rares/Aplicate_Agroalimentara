@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.*?>
 <?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.effect.*?>
@@ -8,7 +9,7 @@
 <?import javafx.scene.shape.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane prefHeight="632.0" prefWidth="1092.0" style="-fx-background-color: #030307; -fx-background-radius: 30;" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.ControllerHomePageMagazin">
+<AnchorPane prefHeight="632.0" prefWidth="1092.0" style="-fx-background-color: #030307; -fx-background-radius: 30;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.ControllerHomePageMagazin">
    <children>
       <AnchorPane layoutX="-1.0" prefHeight="89.0" prefWidth="1092.0" style="-fx-background-color: #011a3d; -fx-background-radius: 30;">
          <effect>
@@ -24,6 +25,15 @@
                   <ImageView fitHeight="40.0" fitWidth="41.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@sign_out.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Button>
+            <Button layoutX="25.0" layoutY="7.0" mnemonicParsing="false" onAction="#loadPhotos" prefHeight="50.0" prefWidth="34.0" styleClass="button2" stylesheets="@dark_theme.css" textFill="#b25050">
+               <graphic>
+                  <ImageView fitHeight="43.0" fitWidth="44.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@refresh.png" />
                      </image>
                   </ImageView>
                </graphic>
