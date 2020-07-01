@@ -10,8 +10,10 @@ import Models.Magazin;
 import Models.Produs;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
@@ -21,32 +23,20 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.io.Writer;
+import java.net.URL;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.Objects;
+import java.util.ResourceBundle;
 
 import static AbstractClasses.AlertBox.showAlert;
 import static Controllers.ControllerMag.gson;
 import static Controllers.ControllerMag.magazine;
 
-public class ControllerProd{
-/*
-@FXML
-private Button btn;
-@FXML
-private javafx.scene.control.TextField descriere_field;
-@FXML
-private javafx.scene.control.TextField nume_field;
-@FXML
-private TextField pret_field;
-@FXML
-private AnchorPane anch;
-@FXML
-private FlowPane flow;
-@FXML
-private TextField categorie;*/
+public class ControllerProd implements Initializable {
+
     @FXML
-    private TextField categoriefx;
+    private ComboBox combofx;
     @FXML
     private AnchorPane anchfx;
     @FXML
@@ -60,6 +50,14 @@ private TextField categorie;*/
     @FXML
     private Button salveazafx;
     private static String cale;
+    public void setCombofx(){
+        for(Magazin m:magazine)
+            if (m.getId().equals(CommunicationClass.getUsername())){
+                for(Categorie c:m.getCategori())
+                    combofx.getItems().add(c.getNume());
+
+            }
+    }
 
     private static void checkNameDoesNotAlreadyExist(String nume) throws NameOfProducAlreadyExistsException {
         for (Magazin m : magazine)
@@ -116,22 +114,17 @@ private TextField categorie;*/
         if(descrierefx.getText().isEmpty()){
             AlertBox.showAlert(Alert.AlertType.ERROR, anchfx.getScene().getWindow(), "Eroare la creare produs!", "Introduceti o descriere!");
             return;}
-        ControllerMag.FromAtoO();
+        if(combofx.getSelectionModel().getSelectedIndex()==-1){
+            AlertBox.showAlert(Alert.AlertType.ERROR, anchfx.getScene().getWindow(), "Eroare la creare produs!", "Introduceti o categorie!");
+            return;}
+        //ControllerMag.FromAtoO();
         try{
         p =new Produs(numefx.getText(),Double.parseDouble(pretfx.getText()),descrierefx.getText(),path);}catch (NumberFormatException e){
             AlertBox.showAlert(Alert.AlertType.ERROR, anchfx.getScene().getWindow(), "Eroare la creare produs!", "Pretul trebuie sa fie un numar!");
             return;
         }
-        String name=categoriefx.getText();
-       // String path= SavePhotos.SavePhotos(produs,"Poze_Produse");
-      //  javafx.scene.image.Image img=new Image(path);
-        //ImageView imageView=new ImageView();
-      //  imageView.setImage(img);
-      //  imageView.setFitWidth(260);
-     //   imageView.setFitHeight(210);
-     //   imageView.setSmooth(true);
-     //   imageView.setCache(true);
-     //   flow.getChildren().add(imageView);
+        String name=combofx.getSelectionModel().getSelectedItem().toString();
+
         boolean adaugat=false;
         for(Magazin m:magazine){
             if(m.getId().equals(CommunicationClass.getUsername()))
@@ -167,4 +160,8 @@ private TextField categorie;*/
 
     }
 
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+        this.setCombofx();
+    }
 }

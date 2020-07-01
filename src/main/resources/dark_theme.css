@@ -66,12 +66,15 @@
     -fx-background-radius :  15 15 15 15;
 }
 
-
+.combo-box:selected{
+    -fx-text-fill: #FFFF;
+}
 .combo-box
 {
     -fx-background-color : #141124;
     -fx-border-color:  #515658;
     -fx-border-radius: 30;
+    -fx-text-fill:#FFFF ;
 }
 .combo-box:hover
 {
@@ -84,6 +87,7 @@
     -fx-background-color : #141124;
     -fx-border-color:  #FFFF;
     -fx-border-radius: 30;
+    -fx-text-fill: #FFFF;
 }
 
 .table-view .column-header,
@@ -161,6 +165,6 @@ text-field:pressed{
 }
 .linear-grad
 {
-    -fx-background-color: linear-gradient(to bottom left, #A868A0, #2D75E8);
+    -fx-background-color: linear-gradient(to bottom left, #500066, #3d0e0e);
 
 }

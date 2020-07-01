@@ -3,6 +3,7 @@ package Controllers;
 import JSON.CommunicationClass;
 import Models.Categorie;
 import Models.Magazin;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
@@ -137,7 +138,7 @@ public class ControllerHomePageMagazin implements Initializable {
             }
         }
     }
-    public void AfisareSortare(){
+    public void AfisareSortare(ActionEvent event){
         this.sortare();
         this.loadPhotos();
     }
@@ -146,5 +147,6 @@ public class ControllerHomePageMagazin implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         ControllerMag.FromAtoO();
+        this.loadPhotos();
     }
 }

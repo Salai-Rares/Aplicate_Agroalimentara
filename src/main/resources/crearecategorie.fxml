@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.*?>
 <?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.effect.*?>
@@ -7,7 +8,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane fx:id="anchfx" prefHeight="596.0" prefWidth="535.0" style="-fx-background-color: #030307; -fx-background-radius: 30;" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.ControllerCat">
+<AnchorPane fx:id="anchfx" prefHeight="596.0" prefWidth="535.0" style="-fx-background-color: #030307; -fx-background-radius: 30;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.ControllerCat">
     <children>
         <AnchorPane layoutX="78.0" layoutY="53.0" prefHeight="503.0" prefWidth="443.0" style="-fx-background-color: #1b1732; -fx-background-radius: 30;">
             <children>
@@ -51,13 +52,12 @@
                     </font>
                 </Label>
                 <TextField fx:id="numefx" layoutX="163.0" layoutY="158.0" prefHeight="31.0" prefWidth="239.0" stylesheets="@dark_theme.css" />
-                <TextField fx:id="magazinfx" layoutX="163.0" layoutY="231.0" prefHeight="31.0" prefWidth="239.0" stylesheets="@dark_theme.css" />
                 <ImageView fitHeight="72.0" fitWidth="75.0" layoutX="342.0" layoutY="437.0" pickOnBounds="true" preserveRatio="true">
                     <image>
                         <Image url="@wheat2.png" />
                     </image>
                 </ImageView>
-                <Button fx:id="salveazafx" alignment="CENTER" contentDisplay="TOP" layoutX="163.0" layoutY="316.0" mnemonicParsing="false" onAction="#ButtonAction" prefHeight="53.0" prefWidth="95.0" styleClass="button4" stylesheets="@dark_theme.css" text="Salveaza">
+                <Button fx:id="salveazafx" alignment="CENTER" contentDisplay="TOP" layoutX="163.0" layoutY="385.0" mnemonicParsing="false" onAction="#ButtonAction" prefHeight="53.0" prefWidth="95.0" styleClass="button4" stylesheets="@dark_theme.css" text="Salveaza">
                     <graphic>
                         <ImageView fitHeight="23.0" fitWidth="28.0" pickOnBounds="true" preserveRatio="true">
                             <image>
@@ -66,6 +66,7 @@
                         </ImageView>
                     </graphic>
                 </Button>
+            <ComboBox fx:id="combofx" layoutX="163.0" layoutY="236.0" prefHeight="33.0" prefWidth="239.0" stylesheets="@dark_theme.css" />
             </children>
         </AnchorPane>
         <AnchorPane prefHeight="53.0" prefWidth="535.0" style="-fx-background-color: #2e0544; -fx-background-radius: 30;">
