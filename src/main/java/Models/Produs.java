@@ -24,7 +24,11 @@ public class Produs  {
     }
 
     public void setPret(double pret) {
-        this.pret = pret;
+
+        if(pret>0)
+            this.pret = pret;
+        else
+            throw new IllegalArgumentException("Pretul trebuie sa fie un numar pozitiv");
     }
 
     public String getPath() {
@@ -53,8 +57,10 @@ public class Produs  {
     }};
 
 
-    public Produs(String nume, double pret, String descriere, String path) {
+    public Produs(String nume, double pret, String descriere, String path) throws IllegalArgumentException{
         this.nume = nume;
+        if(pret<0)
+            throw new IllegalArgumentException("Pretul nu poate fi negativ");
         this.pret = pret;
         this.descriere = descriere;
         this.picture_path=path;

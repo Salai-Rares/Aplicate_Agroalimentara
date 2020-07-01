@@ -2,6 +2,8 @@ package Models;
 
 import com.google.gson.annotations.SerializedName;
 
+import static Exceptions.isPhoneException.isPhone;
+
 public class User {
     @SerializedName("username")
     private String username;
@@ -17,12 +19,17 @@ public class User {
     private String rol;
 
 
-    public User(String username,String password,String nume, String email, String telefon, String rol) {
+    public User(String username,String password,String nume, String email, String telefon, String rol) throws IllegalArgumentException{
         this.username=username;
         this.password=password;
         this.nume = nume;
         this.email = email;
+        if(telefon.length()!=10)
+            throw new IllegalArgumentException("Introduceti un numar valid");
+        if(!isPhone(telefon))
+            throw new NumberFormatException("Numarul trebuie sa inceapa cu 0");
         this.telefon = telefon;
+
         this.rol = rol;
     }
 

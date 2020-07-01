@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 
+import static Exceptions.isPhoneException.isPhone;
+
 public class Magazin {
     private String mag_pic_path;
     private String nume;
@@ -40,12 +42,16 @@ public class Magazin {
         this.telefon = telefon;
     }
 
-    public Magazin(String mag_pic_path, List<Categorie> categori, String nume, String id, String adresa, String telefon) {
+    public Magazin(String mag_pic_path, List<Categorie> categori, String nume, String id, String adresa, String telefon) throws IllegalArgumentException {
         this.nume=nume;
         this.mag_pic_path = mag_pic_path;
         this.categori = categori;
         this.id=id;
         this.adresa=adresa;
+        if(telefon.length()!=10)
+            throw new IllegalArgumentException("Introduceti un numar valid");
+        if(!isPhone(telefon))
+            throw new NumberFormatException("Numarul trebuie sa inceapa cu 0");
         this.telefon=telefon;
 
     }
