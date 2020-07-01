@@ -52,8 +52,9 @@ public class ControllerProd implements Initializable {
     private static String cale;
     public void setCombofx(){
         for(Magazin m:magazine)
-            if (m.getId().equals(CommunicationClass.getUsername())){
+            if (m.getId().equals(CommunicationClass.getUsername()) && m.getCategori().size()!=0){
                 for(Categorie c:m.getCategori())
+
                     combofx.getItems().add(c.getNume());
 
             }
